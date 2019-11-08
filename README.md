@@ -15,13 +15,12 @@
 6. Dodanie tekstur do brył
 7. Stworzenie torów
 8. Dodanie ruchu kamerą 
-9. Dodanie zmienngo oświetlenia
-10. Dodanie zmeinnego oświetlenia
-11. Ruch pociągu (obrót kół wraz z 'popychaczami')
-12. Dodanie krajobrazu
+9. Dodanie zmeinnego oświetlenia
+10. Ruch pociągu (obrót kół wraz z 'popychaczami')
+11. Dodanie krajobrazu
     * drzewa
     * słup
-13. Prezentacja gotowego projektu na spotkaniu nr 7
+12. Prezentacja gotowego projektu na spotkaniu nr 7
 
 **Przykład projektu**
 
