@@ -1,5 +1,10 @@
 #pragma once
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <string>
+
 class ShaderProgram
 {
 	GLuint program_id; 	// The program ID
@@ -17,5 +22,10 @@ public:
 	GLuint get_programID() const
 	{
 		return program_id;
+	}
+
+	void setMat4(const std::string& name, const glm::mat4& mat) const
+	{
+		glUniformMatrix4fv(glGetUniformLocation(program_id, name.c_str()), 1, GL_FALSE, &mat[0][0]);
 	}
 };

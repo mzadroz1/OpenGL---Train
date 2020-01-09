@@ -5,7 +5,7 @@ in vec2 TexCoord;
 out vec4 color;
 
 uniform sampler2D Texture0;
-uniform sampler2D Texture1;
+//uniform sampler2D Texture1;
 
 void main()
 {

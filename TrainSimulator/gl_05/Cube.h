@@ -8,28 +8,20 @@ using namespace std;
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include "ShaderProgram.h"
-class Cube
+#include "Primitive.h"
+class Cube : public Primitive
 {
 public: 
-	GLuint VBO, EBO, VAO;
-	ShaderProgram* theProgram;
-	GLuint texture0;
+	Cube(glm::vec3 coordinates, glm::vec3 size, const char* fileName,
+		glm::vec3 rotation = glm::vec3(0.0f, 0.0f, 0.0f)) :
+		Primitive(coordinates, rotation, fileName, size)
+	{
+		init(fileName);
+	}
+
+	void prepareVertices() override;
+	void prepareIndices() override;
 
 
-	Cube(){
-		theProgram = new ShaderProgram("gl_05.vert", "gl_05.frag");
-	};
-
-	~Cube() {
-		glDeleteVertexArrays(1, &VAO);
-		glDeleteBuffers(1, &VBO);
-		glDeleteBuffers(1, &EBO);
-	};
-
-	GLuint LoadMipmapTexture(GLuint texId, const char* fname);
-
-	void prepareObject(bool option, const char* fileName);
-
-	void draw(GLfloat rot_angle);
 };
 
