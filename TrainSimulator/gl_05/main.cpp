@@ -90,15 +90,17 @@ int main()
 
 		glViewport(0, 0, WIDTH, HEIGHT);
 
+		ShaderProgram ourShader("gl_05.vert", "gl_05.frag");
 		
-		
-		Cube kostka2(glm::vec3(0.5f, -0.5f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), "iipw.png", glm::vec3(0.0f, 0.0f, 0.0f));
-		Cube kostka1(glm::vec3(-0.5f, -0.5f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), "weiti.png", glm::vec3(0.0f, 0.0f, 0.0f));
-		Cube prostopdaloscian(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.5f, 1.5f, 0.5f), "iipw.png", glm::vec3(0.0f, 0.0f, 0.0f));
+		Cube kostka2(glm::vec3(0.5f, -0.5f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), "iipw.png", &ourShader , glm::vec3(0.0f, 0.0f, 0.0f));
+		Cube kostka1(glm::vec3(-0.5f, -0.5f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), "weiti.png", &ourShader,glm::vec3(0.0f, 0.0f, 0.0f));
+		Cube kostka3(glm::vec3(0.5f, -0.5f, 3.0f), glm::vec3(0.5f, 0.5f, 0.5f), "iipw.png", &ourShader,glm::vec3(0.0f, 0.0f, 0.0f));
+		Cube kostka4(glm::vec3(-0.5f, -0.5f, 3.0f), glm::vec3(0.5f, 0.5f, 0.5f), "weiti.png", &ourShader,glm::vec3(0.0f, 0.0f, 0.0f));
+		Cube prostopadloscian(glm::vec3(0.0f, 0.5f, 1.5f), glm::vec3(1.5f, 1.5f, 3.5f), "iipw.png", &ourShader, glm::vec3(0.0f, 0.0f, 0.0f));
 
 		GLfloat rot_angle = 0.75f;
 
-		ShaderProgram ourShader("gl_05.vert", "gl_05.frag");
+		
 		
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
@@ -131,13 +133,24 @@ int main()
 			ourShader.setMat4("view", view);
 
 
-			prostopdaloscian.rotate(glm::vec3(0.0f, rot_angle, 0.0f));
+			//prostopdaloscian.rotate(glm::vec3(0.0f, rot_angle, 0.0f));
 			
-			prostopdaloscian.draw(&ourShader);
-			kostka1.draw(&ourShader);
-			kostka2.draw(&ourShader);
-			
-			
+			prostopadloscian.draw();
+			kostka1.draw();
+			kostka2.draw();
+			kostka3.draw();
+			kostka4.draw();
+
+			kostka1.rotate(glm::vec3(rot_angle, 0.0f, 0.0f));
+			kostka2.rotate(glm::vec3(rot_angle, 0.0f, 0.0f));
+			kostka3.rotate(glm::vec3(rot_angle, 0.0f, 0.0f));
+			kostka4.rotate(glm::vec3(rot_angle, 0.0f, 0.0f));
+
+			kostka1.move(glm::vec3(0.0f, 0.0f, 0.01f));
+			kostka2.move(glm::vec3(0.0f, 0.0f, 0.01f));
+			kostka3.move(glm::vec3(0.0f, 0.0f, 0.01f));
+			kostka4.move(glm::vec3(0.0f, 0.0f, 0.01f));
+			prostopadloscian.move(glm::vec3(0.0f, 0.0f, 0.01f));
 
 			// Swap the screen buffers
 			glfwSwapBuffers(window);

@@ -82,7 +82,7 @@ void Primitive::rotate(glm::vec3 vector)
 	rotations += vector;
 }
 
-void Primitive::draw(ShaderProgram* theProgram)
+void Primitive::draw()
 {
 	glm::mat4 trans = glm::mat4(1.0f);
 	trans = glm::translate(trans, coordinates);

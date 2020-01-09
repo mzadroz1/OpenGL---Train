@@ -27,8 +27,8 @@ public:
 	vector<GLfloat> vertices;
 	vector<GLuint> indices;
 
-	Primitive(glm::vec3 coordinates, glm::vec3 rotations, const char* fileName, glm::vec3 size = { 1.f, 1.f, 1.f })
-		: coordinates(coordinates), rotations(rotations), size(size) 
+	Primitive(glm::vec3 coordinates, glm::vec3 rotations, const char* fileName, ShaderProgram* shader, glm::vec3 size = { 1.f, 1.f, 1.f })
+		: coordinates(coordinates), rotations(rotations), size(size), theProgram(shader)
 	{
 	}
 
@@ -50,7 +50,7 @@ public:
 	void scale(glm::vec3 vector) override;
 	void rotate(glm::vec3 vector) override;
 
-	void draw(ShaderProgram* theProgram); //override;
+	void draw() override;
 
 };
 
