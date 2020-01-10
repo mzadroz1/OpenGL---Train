@@ -86,10 +86,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Composite.cpp" />
     <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="Cylinder.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Primitive.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="StreetLamp.cpp" />
+    <ClCompile Include="Tracks.cpp" />
+    <ClCompile Include="Train.cpp" />
+    <ClCompile Include="TrainBody.cpp" />
+    <ClCompile Include="TrainChassis.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="gl_05.frag" />
@@ -101,10 +108,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Composite.h" />
     <ClInclude Include="Cube.h" />
+    <ClInclude Include="Cylinder.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="ShaderProgram.h" />
+    <ClInclude Include="StreetLamp.h" />
+    <ClInclude Include="Tracks.h" />
+    <ClInclude Include="Train.h" />
+    <ClInclude Include="TrainBody.h" />
+    <ClInclude Include="TrainChassis.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

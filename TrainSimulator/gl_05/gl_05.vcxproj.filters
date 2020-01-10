@@ -13,19 +13,49 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="base">
+      <UniqueIdentifier>{29f3333e-923b-4554-bc85-859e94f12e4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="composites">
+      <UniqueIdentifier>{8506ed66-4ea9-40ab-bb13-a45cf6745a77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="primitives">
+      <UniqueIdentifier>{4485e7b6-db06-4d9d-8432-efc25f7c24cd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ShaderProgram.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Cube.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Composite.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
     <ClCompile Include="Primitive.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="Cylinder.cpp">
+      <Filter>primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="Tracks.cpp">
+      <Filter>composites</Filter>
+    </ClCompile>
+    <ClCompile Include="Train.cpp">
+      <Filter>composites</Filter>
+    </ClCompile>
+    <ClCompile Include="TrainBody.cpp">
+      <Filter>composites</Filter>
+    </ClCompile>
+    <ClCompile Include="TrainChassis.cpp">
+      <Filter>composites</Filter>
+    </ClCompile>
+    <ClCompile Include="StreetLamp.cpp">
+      <Filter>composites</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -44,17 +74,38 @@
     <ClInclude Include="ShaderProgram.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Cube.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Object.h">
+    <ClInclude Include="Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Primitive.h">
-      <Filter>Header Files</Filter>
+      <Filter>base</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Object.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="Composite.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="Cylinder.h">
+      <Filter>primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="StreetLamp.h">
+      <Filter>composites</Filter>
+    </ClInclude>
+    <ClInclude Include="Tracks.h">
+      <Filter>composites</Filter>
+    </ClInclude>
+    <ClInclude Include="Train.h">
+      <Filter>composites</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainBody.h">
+      <Filter>composites</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainChassis.h">
+      <Filter>composites</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

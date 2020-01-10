@@ -14,6 +14,7 @@ using namespace std;
 #include "Camera.h"
 
 const GLuint WIDTH = 800, HEIGHT = 600;
+const float MAX_FPS = 60.0f;
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -111,6 +112,8 @@ int main()
 			glfwPollEvents();
 			float currentFrame = glfwGetTime();
 			deltaTime = currentFrame - lastFrame;
+			if (deltaTime < 1.0f / MAX_FPS) //limiting rendering to MAX_FPS
+				continue;
 			lastFrame = currentFrame;
 
 			processInput(window);
@@ -146,11 +149,11 @@ int main()
 			kostka3.rotate(glm::vec3(rot_angle, 0.0f, 0.0f));
 			kostka4.rotate(glm::vec3(rot_angle, 0.0f, 0.0f));
 
-			kostka1.move(glm::vec3(0.0f, 0.0f, 0.01f));
+			/*kostka1.move(glm::vec3(0.0f, 0.0f, 0.01f));
 			kostka2.move(glm::vec3(0.0f, 0.0f, 0.01f));
 			kostka3.move(glm::vec3(0.0f, 0.0f, 0.01f));
 			kostka4.move(glm::vec3(0.0f, 0.0f, 0.01f));
-			prostopadloscian.move(glm::vec3(0.0f, 0.0f, 0.01f));
+			prostopadloscian.move(glm::vec3(0.0f, 0.0f, 0.01f));*/
 
 			// Swap the screen buffers
 			glfwSwapBuffers(window);
