@@ -24,6 +24,16 @@ public:
 	{
 		return program_id;
 	}
+	
+	void setInt(const std::string& name, int value) const
+	{
+		glUniform1i(glGetUniformLocation(program_id, name.c_str()), value);
+	}
+
+	void setFloat(const std::string& name, float value) const
+	{
+		glUniform1f(glGetUniformLocation(program_id, name.c_str()), value);
+	}
 
 	void setVec3(const std::string& name, float x, float y, float z) const
 	{
