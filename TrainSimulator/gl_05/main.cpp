@@ -111,10 +111,6 @@ int main()
 
 		Cylinder cosiek(glm::vec3(3.f, 3.f, 3.f), glm::vec3(1.f, 2.f, 1.f), "locoBody.png", &ourShader, glm::vec3(90.f, 0.f, 0.f));
 
-		Cube lamp(lightPos, glm::vec3(0.25f, 0.25f, 0.25f), "iipw.png", &lampShader);
-		Cube lamp1(glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(0.25f, 0.25f, 0.25f), "iipw.png", &lampShader);
-		Cube lamp2(glm::vec3(-2.0f, 3.0f, 1.0f), glm::vec3(0.25f, 0.25f, 0.25f), "iipw.png", &lampShader);
-
 		Tracks tory(glm::vec3(0.0f, 0.0f, 0.0f), 50, &ourShader);
 
 		CubicPointLight cubicLamp1(&ourShader, glm::vec3(0.0f, 2.0f, 1.0f), &lampShader, glm::vec3(1.0f, 0.0f, 0.0f));
@@ -124,6 +120,7 @@ int main()
 		GLfloat rot_angle = 0.75f;
 		ourShader.Use();
 		
+
 		
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
@@ -176,6 +173,13 @@ int main()
 			lampShader.Use();
 			lampShader.setMat4("projection", projection);
 			lampShader.setMat4("view", view);
+
+			float colorChange = glfwGetTime();
+
+			float colour = (sin(colorChange+5)+1)/2;
+			float colour1 = (cos(colorChange+8) + 1) / 2;
+			float colour2 = (cos(colorChange+15)*sin(colorChange)*2 + 1) / 2;
+			cubicLamp1.changeColour(glm::vec3(colour, colour1,colour2));;
 
 			cubicLamp1.move(glm::vec3(0.0f, 0.0f, 0.002f));
 			cubicLamp2.move(glm::vec3(0.0f, 0.0f, 0.004f));
