@@ -14,6 +14,7 @@ using namespace std;
 #include "Camera.h"
 #include "PointLight.h"
 #include "CubicPointLight.h"
+#include "Tracks.h"
 
 const GLuint WIDTH = 800, HEIGHT = 600;
 const float MAX_FPS = 60.0f;
@@ -106,6 +107,7 @@ int main()
 		Cube kostka4(glm::vec3(-0.5f, -0.5f, 3.0f), glm::vec3(0.5f, 0.5f, 0.5f), "weiti.png", &ourShader,glm::vec3(0.0f, 0.0f, 0.0f));
 		Cube prostopadloscian(glm::vec3(0.0f, 0.5f, 1.5f), glm::vec3(1.5f, 1.5f, 3.5f), "iipw.png", &ourShader, glm::vec3(0.0f, 0.0f, 0.0f));
 
+		Tracks tory(glm::vec3(0.0f, 0.0f, 0.0f), 50, &ourShader);
 
 		CubicPointLight cubicLamp1(&ourShader, glm::vec3(0.0f, 2.0f, 1.0f), &lampShader, glm::vec3(1.0f, 0.0f, 0.0f));
 		CubicPointLight cubicLamp2(&ourShader, glm::vec3(1.0f, 2.0f, 1.0f), &lampShader, glm::vec3(0.0f, 0.0f, 1.0f));
@@ -160,11 +162,15 @@ int main()
 			kostka3.draw();
 			kostka4.draw();
 
+			tory.draw();
+
 			lampShader.Use();
 			lampShader.setMat4("projection", projection);
 			lampShader.setMat4("view", view);
 
-			cubicLamp1.move(glm::vec3(0.0f, 0.003f, 0.0f));
+			cubicLamp1.move(glm::vec3(0.0f, 0.0f, 0.002f));
+			cubicLamp2.move(glm::vec3(0.0f, 0.0f, 0.004f));
+			cubicLamp3.move(glm::vec3(0.0f, 0.0f, 0.006f));
 			cubicLamp1.draw();
 			cubicLamp2.draw();
 			cubicLamp3.draw();
