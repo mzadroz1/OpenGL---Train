@@ -107,5 +107,8 @@
     <ClInclude Include="TrainChassis.h">
       <Filter>composites</Filter>
     </ClInclude>
+    <ClInclude Include="PointLight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

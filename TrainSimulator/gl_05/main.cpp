@@ -16,6 +16,8 @@ using namespace std;
 const GLuint WIDTH = 800, HEIGHT = 600;
 const float MAX_FPS = 60.0f;
 
+glm::vec3 lightPos(1.2f, 3.0f, .5f);
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
@@ -92,12 +94,15 @@ int main()
 		glViewport(0, 0, WIDTH, HEIGHT);
 
 		ShaderProgram ourShader("gl_05.vert", "gl_05.frag");
+		ShaderProgram lampShader("LampShader.vert", "LampShader.frag");
 		
 		Cube kostka2(glm::vec3(0.5f, -0.5f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), "iipw.png", &ourShader , glm::vec3(0.0f, 0.0f, 0.0f));
 		Cube kostka1(glm::vec3(-0.5f, -0.5f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), "weiti.png", &ourShader,glm::vec3(0.0f, 0.0f, 0.0f));
 		Cube kostka3(glm::vec3(0.5f, -0.5f, 3.0f), glm::vec3(0.5f, 0.5f, 0.5f), "iipw.png", &ourShader,glm::vec3(0.0f, 0.0f, 0.0f));
 		Cube kostka4(glm::vec3(-0.5f, -0.5f, 3.0f), glm::vec3(0.5f, 0.5f, 0.5f), "weiti.png", &ourShader,glm::vec3(0.0f, 0.0f, 0.0f));
 		Cube prostopadloscian(glm::vec3(0.0f, 0.5f, 1.5f), glm::vec3(1.5f, 1.5f, 3.5f), "iipw.png", &ourShader, glm::vec3(0.0f, 0.0f, 0.0f));
+
+		Cube lamp(lightPos, glm::vec3(0.25f, 0.25f, 0.25f), "iipw.png", &lampShader);
 
 		GLfloat rot_angle = 0.75f;
 
@@ -126,6 +131,13 @@ int main()
 			//if (rot_angle >= 360.0f) rot_angle -= 360.0f;
 
 			ourShader.Use();
+			ourShader.setVec3("light.position", lightPos);
+			ourShader.setVec3("viewPos", camera.Position);
+
+			// light properties
+			ourShader.setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
+			ourShader.setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
+			ourShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
 
 			
 			glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)WIDTH / (float)HEIGHT, 0.1f, 100.0f);
@@ -143,6 +155,12 @@ int main()
 			kostka2.draw();
 			kostka3.draw();
 			kostka4.draw();
+
+			lampShader.Use();
+			lampShader.setMat4("projection", projection);
+			lampShader.setMat4("view", view);
+
+			lamp.draw();
 
 			kostka1.rotate(glm::vec3(rot_angle, 0.0f, 0.0f));
 			kostka2.rotate(glm::vec3(rot_angle, 0.0f, 0.0f));
