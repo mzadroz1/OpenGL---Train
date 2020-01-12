@@ -7,7 +7,7 @@ using namespace std;
 class Composite :
 	public Object
 {
-	vector<Primitive*> items;
+	vector<Object*> items;
 	long itemsQuantity;
 public:
 	~Composite();
