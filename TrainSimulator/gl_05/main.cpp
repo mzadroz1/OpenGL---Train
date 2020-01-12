@@ -116,6 +116,7 @@ int main()
 		GLfloat rot_angle = 0.75f;
 		ourShader.Use();
 		
+
 		
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
@@ -167,6 +168,15 @@ int main()
 			lampShader.Use();
 			lampShader.setMat4("projection", projection);
 			lampShader.setMat4("view", view);
+
+			float colorChange = glfwGetTime();
+			float colorChange1 = glfwGetTime();
+			float colorChange2 = glfwGetTime();
+
+			float colour = sin(colorChange) / 2.0f + 0.25f;
+			float colour1 = sin(colorChange1) / 2.0f + 0.2f;
+			float colour2 = sin(colorChange2) / 2.0f + 0.5f;
+			cubicLamp1.changeColour(glm::vec3(colour*colour1, colour1,1- colour2*colour2));;
 
 			cubicLamp1.move(glm::vec3(0.0f, 0.0f, 0.002f));
 			cubicLamp2.move(glm::vec3(0.0f, 0.0f, 0.004f));

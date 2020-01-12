@@ -46,5 +46,11 @@ public:
 		shader->Use();
 		shader->setVec3(("pointLights[" + to_string(number) + "].position").c_str(), lightPos);
 	}
+
+	void changeColour(glm::vec3 colour) {
+		diffuse = colour;
+		shader->Use();
+		shader->setVec3(("pointLights[" + to_string(number) + "].diffuse").c_str(), diffuse);
+	}
 };
 

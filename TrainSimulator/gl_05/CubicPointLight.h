@@ -40,4 +40,8 @@ public:
 		cube->rotate(vector);
 	}
 
+	void changeColour(glm::vec3 vector) {
+		PointLight::changeColour(vector);
+	}
+
 };
