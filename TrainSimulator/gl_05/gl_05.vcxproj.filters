@@ -25,6 +25,9 @@
     <Filter Include="lighting">
       <UniqueIdentifier>{176fae75-38bf-47e1-8e02-44eb05c957c8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="shaders">
+      <UniqueIdentifier>{d9d6a705-db77-4de3-8669-5cf7456f28b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ShaderProgram.cpp">
@@ -62,8 +65,18 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="gl_05.frag" />
-    <None Include="gl_05.vert" />
+    <None Include="LampShader.vert">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="gl_05.frag">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="gl_05.vert">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="LampShader.frag">
+      <Filter>shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="iipw.png">

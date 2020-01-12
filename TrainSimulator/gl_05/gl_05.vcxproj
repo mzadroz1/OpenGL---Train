@@ -101,6 +101,8 @@
   <ItemGroup>
     <None Include="gl_05.frag" />
     <None Include="gl_05.vert" />
+    <None Include="LampShader.frag" />
+    <None Include="LampShader.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="iipw.png" />
