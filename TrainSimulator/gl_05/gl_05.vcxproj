@@ -101,6 +101,8 @@
   <ItemGroup>
     <None Include="gl_05.frag" />
     <None Include="gl_05.vert" />
+    <None Include="LampShader.frag" />
+    <None Include="LampShader.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="iipw.png" />
@@ -110,6 +112,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Composite.h" />
     <ClInclude Include="Cube.h" />
+    <ClInclude Include="CubicPointLight.h" />
     <ClInclude Include="Cylinder.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="PointLight.h" />

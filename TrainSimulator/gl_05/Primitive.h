@@ -23,6 +23,7 @@ public:
 	glm::vec3 coordinates;
 	glm::vec3 rotations;
 	glm::vec3 size;
+	glm::vec3 colour;
 
 	vector<GLfloat> vertices;
 	vector<GLuint> indices;

@@ -13,6 +13,7 @@ using namespace std;
 #include "Cube.h"
 #include "Camera.h"
 #include "PointLight.h"
+#include "CubicPointLight.h"
 
 const GLuint WIDTH = 800, HEIGHT = 600;
 const float MAX_FPS = 60.0f;
@@ -105,16 +106,13 @@ int main()
 		Cube kostka4(glm::vec3(-0.5f, -0.5f, 3.0f), glm::vec3(0.5f, 0.5f, 0.5f), "weiti.png", &ourShader,glm::vec3(0.0f, 0.0f, 0.0f));
 		Cube prostopadloscian(glm::vec3(0.0f, 0.5f, 1.5f), glm::vec3(1.5f, 1.5f, 3.5f), "iipw.png", &ourShader, glm::vec3(0.0f, 0.0f, 0.0f));
 
-		Cube lamp(lightPos, glm::vec3(0.25f, 0.25f, 0.25f), "iipw.png", &lampShader);
-		Cube lamp1(glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(0.25f, 0.25f, 0.25f), "iipw.png", &lampShader);
-		Cube lamp2(glm::vec3(-2.0f, 3.0f, 1.0f), glm::vec3(0.25f, 0.25f, 0.25f), "iipw.png", &lampShader);
+
+		CubicPointLight cubicLamp1(&ourShader, glm::vec3(0.0f, 2.0f, 1.0f), &lampShader, glm::vec3(1.0f, 0.0f, 0.0f));
+		CubicPointLight cubicLamp2(&ourShader, glm::vec3(1.0f, 2.0f, 1.0f), &lampShader, glm::vec3(0.0f, 0.0f, 1.0f));
+		CubicPointLight cubicLamp3(&ourShader, glm::vec3(-1.0f, 2.0f, 1.0f), &lampShader, glm::vec3(0.0f, 1.0f, 0.0f));
 
 		GLfloat rot_angle = 0.75f;
 		ourShader.Use();
-
-		PointLight light1(&ourShader, lightPos,glm::vec3(0.2f,0.2f,0.2f),glm::vec3(0.0f,0.0f,1.0f));
-		PointLight light2(&ourShader, lamp1.coordinates);
-		PointLight light3(&ourShader, lamp2.coordinates, glm::vec3(0.2f, 0.2f, 0.2f), glm::vec3(0.80f, 0.0f, 0.80f));
 		
 		
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -166,17 +164,15 @@ int main()
 			lampShader.setMat4("projection", projection);
 			lampShader.setMat4("view", view);
 
-			lamp.draw();
-			lamp1.draw();
-			lamp2.draw();
+			cubicLamp1.move(glm::vec3(0.0f, 0.003f, 0.0f));
+			cubicLamp1.draw();
+			cubicLamp2.draw();
+			cubicLamp3.draw();
 
 			kostka1.rotate(glm::vec3(rot_angle, 0.0f, 0.0f));
 			kostka2.rotate(glm::vec3(rot_angle, 0.0f, 0.0f));
 			kostka3.rotate(glm::vec3(rot_angle, 0.0f, 0.0f));
 			kostka4.rotate(glm::vec3(rot_angle, 0.0f, 0.0f));
-
-			lamp.move(glm::vec3(0.0f,-rot_angle * 0.01f, -rot_angle * 0.01f));
-			light1.move(glm::vec3(0.0f, -rot_angle * 0.01f, -rot_angle * 0.01f));
 
 			/*kostka1.move(glm::vec3(0.0f, 0.0f, 0.01f));
 			kostka2.move(glm::vec3(0.0f, 0.0f, 0.01f));
