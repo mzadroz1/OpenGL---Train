@@ -14,6 +14,8 @@ using namespace std;
 #include "Camera.h"
 #include "PointLight.h"
 #include "Cylinder.h"
+#include "CubicPointLight.h"
+#include "Tracks.h"
 
 const GLuint WIDTH = 800, HEIGHT = 600;
 const float MAX_FPS = 60.0f;
@@ -106,18 +108,21 @@ int main()
 		Cube kostka4(glm::vec3(-0.5f, -0.5f, 3.0f), glm::vec3(0.5f, 0.5f, 0.5f), "weiti.png", &ourShader,glm::vec3(0.0f, 0.0f, 0.0f));
 		Cube prostopadloscian(glm::vec3(0.0f, 0.5f, 1.5f), glm::vec3(1.5f, 1.5f, 3.5f), "iipw.png", &ourShader, glm::vec3(0.0f, 0.0f, 0.0f));
 
+
 		Cylinder cosiek(glm::vec3(3.f, 3.f, 3.f), glm::vec3(1.f, 2.f, 1.f), "locoBody.png", &ourShader, glm::vec3(90.f, 0.f, 0.f));
 
 		Cube lamp(lightPos, glm::vec3(0.25f, 0.25f, 0.25f), "iipw.png", &lampShader);
 		Cube lamp1(glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(0.25f, 0.25f, 0.25f), "iipw.png", &lampShader);
 		Cube lamp2(glm::vec3(-2.0f, 3.0f, 1.0f), glm::vec3(0.25f, 0.25f, 0.25f), "iipw.png", &lampShader);
 
+		Tracks tory(glm::vec3(0.0f, 0.0f, 0.0f), 50, &ourShader);
+
+		CubicPointLight cubicLamp1(&ourShader, glm::vec3(0.0f, 2.0f, 1.0f), &lampShader, glm::vec3(1.0f, 0.0f, 0.0f));
+		CubicPointLight cubicLamp2(&ourShader, glm::vec3(1.0f, 2.0f, 1.0f), &lampShader, glm::vec3(0.0f, 0.0f, 1.0f));
+		CubicPointLight cubicLamp3(&ourShader, glm::vec3(-1.0f, 2.0f, 1.0f), &lampShader, glm::vec3(0.0f, 1.0f, 0.0f));
+
 		GLfloat rot_angle = 0.75f;
 		ourShader.Use();
-
-		PointLight light1(&ourShader, lightPos,glm::vec3(0.2f,0.2f,0.2f),glm::vec3(0.0f,0.0f,1.0f));
-		PointLight light2(&ourShader, lamp1.coordinates);
-		PointLight light3(&ourShader, lamp2.coordinates, glm::vec3(0.2f, 0.2f, 0.2f), glm::vec3(0.80f, 0.0f, 0.80f));
 		
 		
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -166,22 +171,23 @@ int main()
 			kostka4.draw();
 
 			cosiek.draw();
+			tory.draw();
 
 			lampShader.Use();
 			lampShader.setMat4("projection", projection);
 			lampShader.setMat4("view", view);
 
-			lamp.draw();
-			lamp1.draw();
-			lamp2.draw();
+			cubicLamp1.move(glm::vec3(0.0f, 0.0f, 0.002f));
+			cubicLamp2.move(glm::vec3(0.0f, 0.0f, 0.004f));
+			cubicLamp3.move(glm::vec3(0.0f, 0.0f, 0.006f));
+			cubicLamp1.draw();
+			cubicLamp2.draw();
+			cubicLamp3.draw();
 
 			kostka1.rotate(glm::vec3(rot_angle, 0.0f, 0.0f));
 			kostka2.rotate(glm::vec3(rot_angle, 0.0f, 0.0f));
 			kostka3.rotate(glm::vec3(rot_angle, 0.0f, 0.0f));
 			kostka4.rotate(glm::vec3(rot_angle, 0.0f, 0.0f));
-
-			lamp.move(glm::vec3(0.0f,-rot_angle * 0.01f, -rot_angle * 0.01f));
-			light1.move(glm::vec3(0.0f, -rot_angle * 0.01f, -rot_angle * 0.01f));
 
 			/*kostka1.move(glm::vec3(0.0f, 0.0f, 0.01f));
 			kostka2.move(glm::vec3(0.0f, 0.0f, 0.01f));

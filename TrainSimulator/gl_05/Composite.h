@@ -7,9 +7,10 @@ using namespace std;
 class Composite :
 	public Object
 {
-	vector<Primitive*> items;
-	long itemsQuantity;
 public:
+	vector<Object*> items;
+	long itemsQuantity;
+
 	~Composite();
 
 	void move(glm::vec3 vector) override;
