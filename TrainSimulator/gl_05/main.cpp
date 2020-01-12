@@ -13,6 +13,7 @@ using namespace std;
 #include "Cube.h"
 #include "Camera.h"
 #include "PointLight.h"
+#include "Cylinder.h"
 #include "CubicPointLight.h"
 #include "Tracks.h"
 
@@ -107,6 +108,13 @@ int main()
 		Cube kostka4(glm::vec3(-0.5f, -0.5f, 3.0f), glm::vec3(0.5f, 0.5f, 0.5f), "weiti.png", &ourShader,glm::vec3(0.0f, 0.0f, 0.0f));
 		Cube prostopadloscian(glm::vec3(0.0f, 0.5f, 1.5f), glm::vec3(1.5f, 1.5f, 3.5f), "iipw.png", &ourShader, glm::vec3(0.0f, 0.0f, 0.0f));
 
+
+		Cylinder cosiek(glm::vec3(3.f, 3.f, 3.f), glm::vec3(1.f, 2.f, 1.f), "locoBody.png", &ourShader, glm::vec3(90.f, 0.f, 0.f));
+
+		Cube lamp(lightPos, glm::vec3(0.25f, 0.25f, 0.25f), "iipw.png", &lampShader);
+		Cube lamp1(glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(0.25f, 0.25f, 0.25f), "iipw.png", &lampShader);
+		Cube lamp2(glm::vec3(-2.0f, 3.0f, 1.0f), glm::vec3(0.25f, 0.25f, 0.25f), "iipw.png", &lampShader);
+
 		Tracks tory(glm::vec3(0.0f, 0.0f, 0.0f), 50, &ourShader);
 
 		CubicPointLight cubicLamp1(&ourShader, glm::vec3(0.0f, 2.0f, 1.0f), &lampShader, glm::vec3(1.0f, 0.0f, 0.0f));
@@ -162,6 +170,7 @@ int main()
 			kostka3.draw();
 			kostka4.draw();
 
+			cosiek.draw();
 			tory.draw();
 
 			lampShader.Use();
