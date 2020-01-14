@@ -23,7 +23,7 @@ struct Light {
 uniform vec3 viewPos;
 
 uniform int pointLightsQuantity;
-uniform Light pointLights[10];
+uniform Light pointLights[100];
 
 vec3 CalcPointLight(Light light, vec3 normal, vec3 fragPos, vec3 viewDir);
 

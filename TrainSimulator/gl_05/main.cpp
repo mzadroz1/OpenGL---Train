@@ -127,7 +127,12 @@ int main()
 		//CylindricalPointLight cylindricalLamp(&ourShader, glm::vec3(-5.0f, 2.0f, 1.0f), &lampShader, glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.1f, 0.1f, 0.1f));
 		//cylindricalLamp.scale(glm::vec3(0.0f, 5.0f, 0.0f));
 
-		StreetLamp latarnia(glm::vec3(-2.0f, 0.0f, 3.0f),&ourShader,&lampShader);
+		StreetLamp* latarnie[10];
+		for(int i =0; i < 10; i++)
+		{
+			latarnie[i] = new StreetLamp(glm::vec3(2.0f, 0.0f, 5.0f*i), &ourShader, &lampShader);
+		}
+		
 
 		GLfloat rot_angle = 0.75f;
 		ourShader.Use();
@@ -182,7 +187,11 @@ int main()
 			cosiek.draw();
 			kulka.draw();
 			kulka2.draw();
-			latarnia.draw();
+			for (int i = 0; i < 10; i++) {
+				ourShader.Use();
+				latarnie[i]->draw();
+			}
+
 			tory.draw();
 
 			lampShader.Use();
