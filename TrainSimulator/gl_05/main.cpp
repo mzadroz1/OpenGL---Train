@@ -4,7 +4,6 @@
 #include <GLFW/glfw3.h>
 #include <SOIL.h>
 #include <iostream>
-#include "StreetLamp.h"
 using namespace std;
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -17,12 +16,12 @@ using namespace std;
 #include "Cylinder.h"
 #include "CubicPointLight.h"
 #include "Tracks.h"
-#include "Sphere.h"
-#include "SphericalPointLight.h"
-#include "CylindricalPointLight.h"
+#include "Skybox.h"
 
+const GLuint WIDTH = 800, HEIGHT = 600;
 const float MAX_FPS = 60.0f;
 
+glm::vec3 lightPos(1.2f, 3.0f, .5f);
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -57,7 +56,7 @@ GLuint LoadMipmapTexture(GLuint texId, const char* fname)
 	glBindTexture(GL_TEXTURE_2D, 0);
 	return texture;
 }
-Camera camera(glm::vec3(-1.0f, 2.0f, 10.0f));
+Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 float lastX = 800 / 2.0f;
 float lastY = 600 / 2.0f;
 bool firstMouse = true;
@@ -80,8 +79,6 @@ int main()
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 	try
 	{
-		const GLuint WIDTH = glfwGetVideoMode(glfwGetPrimaryMonitor())->width;
-		const GLuint HEIGHT = glfwGetVideoMode(glfwGetPrimaryMonitor())->height;
 
 		GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "GKOM - OpenGL 05", nullptr, nullptr);
 		if (window == nullptr)
@@ -105,34 +102,23 @@ int main()
 
 		ShaderProgram ourShader("gl_05.vert", "gl_05.frag");
 		ShaderProgram lampShader("LampShader.vert", "LampShader.frag");
+		ShaderProgram skyboxShader("SkyboxShader.vert", "SkyboxShader.frag");
 		
 		Cube kostka2(glm::vec3(0.5f, -0.5f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), "iipw.png", &ourShader , glm::vec3(0.0f, 0.0f, 0.0f));
 		Cube kostka1(glm::vec3(-0.5f, -0.5f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), "weiti.png", &ourShader,glm::vec3(0.0f, 0.0f, 0.0f));
 		Cube kostka3(glm::vec3(0.5f, -0.5f, 3.0f), glm::vec3(0.5f, 0.5f, 0.5f), "iipw.png", &ourShader,glm::vec3(0.0f, 0.0f, 0.0f));
 		Cube kostka4(glm::vec3(-0.5f, -0.5f, 3.0f), glm::vec3(0.5f, 0.5f, 0.5f), "weiti.png", &ourShader,glm::vec3(0.0f, 0.0f, 0.0f));
 		Cube prostopadloscian(glm::vec3(0.0f, 0.5f, 1.5f), glm::vec3(1.5f, 1.5f, 3.5f), "iipw.png", &ourShader, glm::vec3(0.0f, 0.0f, 0.0f));
+		Skybox skybox = Skybox(skyboxShader);
 
 
 		Cylinder cosiek(glm::vec3(3.f, 3.f, 3.f), glm::vec3(1.f, 2.f, 1.f), "locoBody.png", &ourShader, glm::vec3(90.f, 0.f, 0.f));
-		Sphere kulka(glm::vec3(-3.f, -3.f, -3.f), glm::vec3(1.f, 1.f, 1.f), "moon1024.bmp", &ourShader, glm::vec3(-90.f, 0.f, 0.f));
-		Sphere kulka2(glm::vec3(-1.f, -1.f, -1.f), glm::vec3(1.f, 1.f, 1.f), "earth2048.bmp", &ourShader, glm::vec3(-90.f, 0.f, 0.f));
-
 
 		Tracks tory(glm::vec3(0.0f, 0.0f, 0.0f), 50, &ourShader);
 
-		//CubicPointLight cubicLamp1(&ourShader, glm::vec3(0.0f, 2.0f, 1.0f), &lampShader, glm::vec3(1.0f, 0.0f, 0.0f));
-		//CubicPointLight cubicLamp2(&ourShader, glm::vec3(1.0f, 2.0f, 1.0f), &lampShader, glm::vec3(0.0f, 0.0f, 1.0f));
-		//CubicPointLight cubicLamp3(&ourShader, glm::vec3(-1.0f, 2.0f, 1.0f), &lampShader, glm::vec3(0.0f, 1.0f, 0.0f));
-		//SphericalPointLight sphericalLamp(&ourShader, glm::vec3(-4.0f, 2.0f, 1.0f), &lampShader, glm::vec3(1.0f, 0.0f, 1.0f));
-		//CylindricalPointLight cylindricalLamp(&ourShader, glm::vec3(-5.0f, 2.0f, 1.0f), &lampShader, glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.1f, 0.1f, 0.1f));
-		//cylindricalLamp.scale(glm::vec3(0.0f, 5.0f, 0.0f));
-
-		StreetLamp* latarnie[10];
-		for(int i =0; i < 10; i++)
-		{
-			latarnie[i] = new StreetLamp(glm::vec3(2.0f, 0.0f, 5.0f*i), &ourShader, &lampShader);
-		}
-		
+		CubicPointLight cubicLamp1(&ourShader, glm::vec3(0.0f, 2.0f, 1.0f), &lampShader, glm::vec3(1.0f, 0.0f, 0.0f));
+		CubicPointLight cubicLamp2(&ourShader, glm::vec3(1.0f, 2.0f, 1.0f), &lampShader, glm::vec3(0.0f, 0.0f, 1.0f));
+		CubicPointLight cubicLamp3(&ourShader, glm::vec3(-1.0f, 2.0f, 1.0f), &lampShader, glm::vec3(0.0f, 1.0f, 0.0f));
 
 		GLfloat rot_angle = 0.75f;
 		ourShader.Use();
@@ -185,13 +171,6 @@ int main()
 			kostka4.draw();
 
 			cosiek.draw();
-			kulka.draw();
-			kulka2.draw();
-			for (int i = 0; i < 10; i++) {
-				ourShader.Use();
-				latarnie[i]->draw();
-			}
-
 			tory.draw();
 
 			lampShader.Use();
@@ -203,23 +182,23 @@ int main()
 			float colour = (sin(colorChange+5)+1)/2;
 			float colour1 = (cos(colorChange+8) + 1) / 2;
 			float colour2 = (cos(colorChange+15)*sin(colorChange)*2 + 1) / 2;
-			//cubicLamp1.changeColour(glm::vec3(colour, colour1,colour2));;
+			cubicLamp1.changeColour(glm::vec3(colour, colour1,colour2));;
 
-			//cubicLamp1.move(glm::vec3(0.0f, 0.0f, 0.002f));
-			//cubicLamp2.move(glm::vec3(0.0f, 0.0f, 0.004f));
-			//cubicLamp3.move(glm::vec3(0.0f, 0.0f, 0.006f));
-			//cubicLamp1.draw();
-			//cubicLamp2.draw();
-			//cubicLamp3.draw();
-
-			//sphericalLamp.draw();
-			//cylindricalLamp.draw();
-			
+			cubicLamp1.move(glm::vec3(0.0f, 0.0f, 0.002f));
+			cubicLamp2.move(glm::vec3(0.0f, 0.0f, 0.004f));
+			cubicLamp3.move(glm::vec3(0.0f, 0.0f, 0.006f));
+			cubicLamp1.draw();
+			cubicLamp2.draw();
+			cubicLamp3.draw();
 
 			kostka1.rotate(glm::vec3(rot_angle, 0.0f, 0.0f));
 			kostka2.rotate(glm::vec3(rot_angle, 0.0f, 0.0f));
 			kostka3.rotate(glm::vec3(rot_angle, 0.0f, 0.0f));
 			kostka4.rotate(glm::vec3(rot_angle, 0.0f, 0.0f));
+
+			skybox.draw(projection, view);
+
+
 
 			/*kostka1.move(glm::vec3(0.0f, 0.0f, 0.01f));
 			kostka2.move(glm::vec3(0.0f, 0.0f, 0.01f));
