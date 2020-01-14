@@ -138,6 +138,9 @@
     <ClInclude Include="SphericalPointLight.h">
       <Filter>lighting</Filter>
     </ClInclude>
+    <ClInclude Include="CylindricalPointLight.h">
+      <Filter>lighting</Filter>
+    </ClInclude>
     <ClInclude Include="ShapedPointLight.h">
       <Filter>lighting</Filter>
     </ClInclude>
