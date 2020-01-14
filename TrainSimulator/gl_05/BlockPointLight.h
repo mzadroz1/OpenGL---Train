@@ -3,20 +3,20 @@
 #include "Object.h"
 #include "PointLight.h"
 #include "Cube.h"
-class ShapedPointLight :
+class BlockPointLight :
 	public PointLight,
 	public Object {
 public:
 	Primitive* block;
 
-	ShapedPointLight(ShaderProgram* _shader, glm::vec3 _lightPos,
+	BlockPointLight(ShaderProgram* _shader, glm::vec3 _lightPos,
 		glm::vec3 _diffuse = { 0.5f, 0.5f, 0.5f },
 		glm::vec3 _ambient = { 0.2f, 0.2f, 0.2f }, glm::vec3 _specular = { 1.0f, 1.0f, 1.0f },
 		float _constant = 1.0f, float _linear = 0.09f, float _quadratic = 0.032f) :
 		PointLight(_shader, _lightPos, _ambient, _diffuse, _specular, _constant, _linear, _quadratic) {
 	}
 
-	~ShapedPointLight() {
+	~BlockPointLight() {
 		delete block;
 	}
 

@@ -141,7 +141,7 @@
     <ClInclude Include="CylindricalPointLight.h">
       <Filter>lighting</Filter>
     </ClInclude>
-    <ClInclude Include="ShapedPointLight.h">
+    <ClInclude Include="BlockPointLight.h">
       <Filter>lighting</Filter>
     </ClInclude>
   </ItemGroup>

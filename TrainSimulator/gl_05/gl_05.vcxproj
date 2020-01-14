@@ -120,7 +120,7 @@
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="ShaderProgram.h" />
-    <ClInclude Include="ShapedPointLight.h" />
+    <ClInclude Include="BlockPointLight.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="SphericalPointLight.h" />
     <ClInclude Include="StreetLamp.h" />
