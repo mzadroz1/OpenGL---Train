@@ -92,6 +92,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Primitive.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="StreetLamp.cpp" />
     <ClCompile Include="Tracks.cpp" />
     <ClCompile Include="Train.cpp" />
@@ -118,6 +119,7 @@
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="ShaderProgram.h" />
+    <ClInclude Include="Sphere.h" />
     <ClInclude Include="StreetLamp.h" />
     <ClInclude Include="Tracks.h" />
     <ClInclude Include="Train.h" />
