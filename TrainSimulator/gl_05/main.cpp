@@ -16,6 +16,7 @@ using namespace std;
 #include "Cylinder.h"
 #include "CubicPointLight.h"
 #include "Tracks.h"
+#include "Sphere.h"
 
 const GLuint WIDTH = 800, HEIGHT = 600;
 const float MAX_FPS = 60.0f;
@@ -110,6 +111,9 @@ int main()
 
 
 		Cylinder cosiek(glm::vec3(3.f, 3.f, 3.f), glm::vec3(1.f, 2.f, 1.f), "locoBody.png", &ourShader, glm::vec3(90.f, 0.f, 0.f));
+		Sphere kulka(glm::vec3(-3.f, -3.f, -3.f), glm::vec3(1.f, 1.f, 1.f), "moon1024.bmp", &ourShader, glm::vec3(-90.f, 0.f, 0.f));
+		Sphere kulka2(glm::vec3(-1.f, -1.f, -1.f), glm::vec3(1.f, 1.f, 1.f), "earth2048.bmp", &ourShader, glm::vec3(-90.f, 0.f, 0.f));
+
 
 		Tracks tory(glm::vec3(0.0f, 0.0f, 0.0f), 50, &ourShader);
 
@@ -168,6 +172,9 @@ int main()
 			kostka4.draw();
 
 			cosiek.draw();
+			kulka.draw();
+			kulka2.draw();
+
 			tory.draw();
 
 			lampShader.Use();
