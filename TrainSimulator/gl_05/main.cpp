@@ -17,6 +17,7 @@ using namespace std;
 #include "CubicPointLight.h"
 #include "Tracks.h"
 #include "Sphere.h"
+#include "SphericalPointLight.h"
 
 const GLuint WIDTH = 800, HEIGHT = 600;
 const float MAX_FPS = 60.0f;
@@ -120,6 +121,7 @@ int main()
 		CubicPointLight cubicLamp1(&ourShader, glm::vec3(0.0f, 2.0f, 1.0f), &lampShader, glm::vec3(1.0f, 0.0f, 0.0f));
 		CubicPointLight cubicLamp2(&ourShader, glm::vec3(1.0f, 2.0f, 1.0f), &lampShader, glm::vec3(0.0f, 0.0f, 1.0f));
 		CubicPointLight cubicLamp3(&ourShader, glm::vec3(-1.0f, 2.0f, 1.0f), &lampShader, glm::vec3(0.0f, 1.0f, 0.0f));
+		SphericalPointLight sphericalLamp(&ourShader, glm::vec3(-4.0f, 2.0f, 1.0f), &lampShader, glm::vec3(1.0f, 0.0f, 1.0f));
 
 		GLfloat rot_angle = 0.75f;
 		ourShader.Use();
@@ -194,6 +196,8 @@ int main()
 			cubicLamp1.draw();
 			cubicLamp2.draw();
 			cubicLamp3.draw();
+
+			sphericalLamp.draw();
 
 			kostka1.rotate(glm::vec3(rot_angle, 0.0f, 0.0f));
 			kostka2.rotate(glm::vec3(rot_angle, 0.0f, 0.0f));
