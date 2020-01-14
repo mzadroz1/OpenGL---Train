@@ -115,11 +115,14 @@
     <ClInclude Include="Cube.h" />
     <ClInclude Include="CubicPointLight.h" />
     <ClInclude Include="Cylinder.h" />
+    <ClInclude Include="CylindricalPointLight.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="ShaderProgram.h" />
+    <ClInclude Include="BlockPointLight.h" />
     <ClInclude Include="Sphere.h" />
+    <ClInclude Include="SphericalPointLight.h" />
     <ClInclude Include="StreetLamp.h" />
     <ClInclude Include="Tracks.h" />
     <ClInclude Include="Train.h" />

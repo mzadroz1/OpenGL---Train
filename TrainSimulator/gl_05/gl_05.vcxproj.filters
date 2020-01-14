@@ -135,5 +135,14 @@
     <ClInclude Include="Sphere.h">
       <Filter>primitives</Filter>
     </ClInclude>
+    <ClInclude Include="SphericalPointLight.h">
+      <Filter>lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="CylindricalPointLight.h">
+      <Filter>lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockPointLight.h">
+      <Filter>lighting</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
