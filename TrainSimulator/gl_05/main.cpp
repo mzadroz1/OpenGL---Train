@@ -20,10 +20,8 @@ using namespace std;
 #include "SphericalPointLight.h"
 #include "CylindricalPointLight.h"
 
-const GLuint WIDTH = 800, HEIGHT = 600;
 const float MAX_FPS = 60.0f;
 
-glm::vec3 lightPos(1.2f, 3.0f, .5f);
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -58,7 +56,7 @@ GLuint LoadMipmapTexture(GLuint texId, const char* fname)
 	glBindTexture(GL_TEXTURE_2D, 0);
 	return texture;
 }
-Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+Camera camera(glm::vec3(-1.0f, 2.0f, 10.0f));
 float lastX = 800 / 2.0f;
 float lastY = 600 / 2.0f;
 bool firstMouse = true;
@@ -81,6 +79,8 @@ int main()
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 	try
 	{
+		const GLuint WIDTH = glfwGetVideoMode(glfwGetPrimaryMonitor())->width;
+		const GLuint HEIGHT = glfwGetVideoMode(glfwGetPrimaryMonitor())->height;
 
 		GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "GKOM - OpenGL 05", nullptr, nullptr);
 		if (window == nullptr)
