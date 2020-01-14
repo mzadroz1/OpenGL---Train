@@ -4,6 +4,7 @@
 #include <GLFW/glfw3.h>
 #include <SOIL.h>
 #include <iostream>
+#include "StreetLamp.h"
 using namespace std;
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -119,12 +120,14 @@ int main()
 
 		Tracks tory(glm::vec3(0.0f, 0.0f, 0.0f), 50, &ourShader);
 
-		CubicPointLight cubicLamp1(&ourShader, glm::vec3(0.0f, 2.0f, 1.0f), &lampShader, glm::vec3(1.0f, 0.0f, 0.0f));
-		CubicPointLight cubicLamp2(&ourShader, glm::vec3(1.0f, 2.0f, 1.0f), &lampShader, glm::vec3(0.0f, 0.0f, 1.0f));
-		CubicPointLight cubicLamp3(&ourShader, glm::vec3(-1.0f, 2.0f, 1.0f), &lampShader, glm::vec3(0.0f, 1.0f, 0.0f));
-		SphericalPointLight sphericalLamp(&ourShader, glm::vec3(-4.0f, 2.0f, 1.0f), &lampShader, glm::vec3(1.0f, 0.0f, 1.0f));
-		CylindricalPointLight cylindricalLamp(&ourShader, glm::vec3(-5.0f, 2.0f, 1.0f), &lampShader, glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.1f, 0.1f, 0.1f));
-		cylindricalLamp.scale(glm::vec3(0.0f, 5.0f, 0.0f));
+		//CubicPointLight cubicLamp1(&ourShader, glm::vec3(0.0f, 2.0f, 1.0f), &lampShader, glm::vec3(1.0f, 0.0f, 0.0f));
+		//CubicPointLight cubicLamp2(&ourShader, glm::vec3(1.0f, 2.0f, 1.0f), &lampShader, glm::vec3(0.0f, 0.0f, 1.0f));
+		//CubicPointLight cubicLamp3(&ourShader, glm::vec3(-1.0f, 2.0f, 1.0f), &lampShader, glm::vec3(0.0f, 1.0f, 0.0f));
+		//SphericalPointLight sphericalLamp(&ourShader, glm::vec3(-4.0f, 2.0f, 1.0f), &lampShader, glm::vec3(1.0f, 0.0f, 1.0f));
+		//CylindricalPointLight cylindricalLamp(&ourShader, glm::vec3(-5.0f, 2.0f, 1.0f), &lampShader, glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.1f, 0.1f, 0.1f));
+		//cylindricalLamp.scale(glm::vec3(0.0f, 5.0f, 0.0f));
+
+		StreetLamp latarnia(glm::vec3(-2.0f, 0.0f, 3.0f),&ourShader,&lampShader);
 
 		GLfloat rot_angle = 0.75f;
 		ourShader.Use();
@@ -179,7 +182,7 @@ int main()
 			cosiek.draw();
 			kulka.draw();
 			kulka2.draw();
-
+			latarnia.draw();
 			tory.draw();
 
 			lampShader.Use();
@@ -191,17 +194,18 @@ int main()
 			float colour = (sin(colorChange+5)+1)/2;
 			float colour1 = (cos(colorChange+8) + 1) / 2;
 			float colour2 = (cos(colorChange+15)*sin(colorChange)*2 + 1) / 2;
-			cubicLamp1.changeColour(glm::vec3(colour, colour1,colour2));;
+			//cubicLamp1.changeColour(glm::vec3(colour, colour1,colour2));;
 
-			cubicLamp1.move(glm::vec3(0.0f, 0.0f, 0.002f));
-			cubicLamp2.move(glm::vec3(0.0f, 0.0f, 0.004f));
-			cubicLamp3.move(glm::vec3(0.0f, 0.0f, 0.006f));
-			cubicLamp1.draw();
-			cubicLamp2.draw();
-			cubicLamp3.draw();
+			//cubicLamp1.move(glm::vec3(0.0f, 0.0f, 0.002f));
+			//cubicLamp2.move(glm::vec3(0.0f, 0.0f, 0.004f));
+			//cubicLamp3.move(glm::vec3(0.0f, 0.0f, 0.006f));
+			//cubicLamp1.draw();
+			//cubicLamp2.draw();
+			//cubicLamp3.draw();
 
-			sphericalLamp.draw();
-			cylindricalLamp.draw();
+			//sphericalLamp.draw();
+			//cylindricalLamp.draw();
+			
 
 			kostka1.rotate(glm::vec3(rot_angle, 0.0f, 0.0f));
 			kostka2.rotate(glm::vec3(rot_angle, 0.0f, 0.0f));

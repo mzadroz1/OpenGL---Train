@@ -102,7 +102,7 @@ void Primitive::draw()
 	glBindTexture(GL_TEXTURE_2D, texture0);
 	glUniform1i(glGetUniformLocation(theProgram->get_programID(), "Texture0"), 0);
 
-	//theProgram->Use();
+	theProgram->Use();
 
 	glBindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
