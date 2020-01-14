@@ -63,6 +63,9 @@
     <ClCompile Include="StreetLamp.cpp">
       <Filter>composites</Filter>
     </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>primitives</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="LampShader.vert">
@@ -128,6 +131,9 @@
     </ClInclude>
     <ClInclude Include="CubicPointLight.h">
       <Filter>lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>primitives</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
