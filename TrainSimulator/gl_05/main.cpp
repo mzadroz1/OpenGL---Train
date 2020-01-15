@@ -107,7 +107,7 @@ int main() {
 		}
 		TrainChassis pod({ 0.0f,0.0f,1.0f }, &ourShader);
 		TrainBody nad({ 0.0f,0.0f,1.0f }, & ourShader, &lampShader);
-		GLfloat rot_angle = 0.75f;
+		GLfloat rot_angle = 0.5f;
 
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		// main event loop
@@ -144,6 +144,8 @@ int main() {
 			//cosiek.draw();
 			pod.draw();
 			nad.draw();
+			//pod.move(glm::vec3(0.0f, 0.0f, 0.01f));
+			//nad.move(glm::vec3(0.0f, 0.0f, 0.01f));
 			
 
 			//cubicLamp1.move(glm::vec3(0.0f, 0.0f, 0.002f));
