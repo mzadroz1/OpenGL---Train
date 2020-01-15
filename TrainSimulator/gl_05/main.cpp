@@ -32,6 +32,8 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
 }
+
+void setUpShaders(ShaderProgram* shader, ShaderProgram* lampShader, ShaderProgram* skyboxShader);
 GLuint LoadMipmapTexture(GLuint texId, const char* fname) {
 	int width, height;
 	unsigned char* image = SOIL_load_image(fname, &width, &height, 0, SOIL_LOAD_RGB);
@@ -54,6 +56,8 @@ bool firstMouse = true;
 // timing
 float deltaTime = 0.0f;	// time between current frame and last frame
 float lastFrame = 0.0f;
+GLuint WIDTH;
+GLuint HEIGHT;
 int main() {
 	if (glfwInit() != GL_TRUE) {
 		cout << "GLFW initialization failed" << endl;
@@ -64,8 +68,8 @@ int main() {
 	//glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 	try {
-		const GLuint WIDTH = glfwGetVideoMode(glfwGetPrimaryMonitor())->width;
-		const GLuint HEIGHT = glfwGetVideoMode(glfwGetPrimaryMonitor())->height;
+		WIDTH = glfwGetVideoMode(glfwGetPrimaryMonitor())->width;
+		HEIGHT = glfwGetVideoMode(glfwGetPrimaryMonitor())->height;
 		GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "GKOM - OpenGL 05", nullptr, nullptr);
 		if (window == nullptr)
 			throw exception("GLFW window not created");
@@ -120,40 +124,33 @@ int main() {
 				continue;
 			lastFrame = currentFrame;
 			processInput(window);
+			
 			// Clear the colorbuffer
 			glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			//rot_angle += 0.01f;
 			//if (rot_angle >= 360.0f) rot_angle -= 360.0f;
-			ourShader.Use();
 
-			ourShader.setVec3("viewPos", camera.Position);
-			// light properties
-
-
-			glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)WIDTH / (float)HEIGHT, 0.1f, 100.0f);
-			ourShader.setMat4("projection", projection);
-			// camera/view transformation
-			glm::mat4 view = camera.GetViewMatrix();
-			ourShader.setMat4("view", view);
-			//prostopdaloscian.rotate(glm::vec3(0.0f, rot_angle, 0.0f));
+			setUpShaders(&ourShader, &lampShader, &skyboxShader);
 			
+			//prostopdaloscian.rotate(glm::vec3(0.0f, rot_angle, 0.0f));
+			skybox.draw();
 			prostopadloscian.draw();
 			kostka1.draw();
 			kostka2.draw();
 			kostka3.draw();
 			kostka4.draw();
-			cosiek.draw();
+			
 			kulka.draw();
 			kulka2.draw();
+			
+			tory.draw();
+			
+
 			for (int i = 0; i < 10; i++) {
-				ourShader.Use();
 				latarnie[i]->draw();
 			}
-			tory.draw();
-			lampShader.Use();
-			lampShader.setMat4("projection", projection);
-			lampShader.setMat4("view", view);
+			cosiek.draw();
 			float colorChange = glfwGetTime();
 			float colour = (sin(colorChange + 5) + 1) / 2;
 			float colour1 = (cos(colorChange + 8) + 1) / 2;
@@ -177,7 +174,7 @@ int main() {
 			kostka3.move(glm::vec3(0.0f, 0.0f, 0.01f));
 			kostka4.move(glm::vec3(0.0f, 0.0f, 0.01f));
 			prostopadloscian.move(glm::vec3(0.0f, 0.0f, 0.01f));*/
-			skybox.draw(projection, view);
+			
 			// Swap the screen buffers
 			glfwSwapBuffers(window);
 		}
@@ -188,6 +185,27 @@ int main() {
 	glfwTerminate();
 	return 0;
 }
+
+void setUpShaders(ShaderProgram* shader, ShaderProgram* lampShader, ShaderProgram* skyboxShader)
+{
+	glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)WIDTH / (float)HEIGHT, 0.1f, 100.0f);
+	glm::mat4 view = camera.GetViewMatrix();
+	
+	shader->Use();
+	shader->setVec3("viewPos", camera.Position);
+	shader->setMat4("projection", projection);
+	shader->setMat4("view", view);
+
+	lampShader->Use();
+	lampShader->setMat4("projection", projection);
+	lampShader->setMat4("view", view);
+
+	skyboxShader->Use();
+	view = glm::mat4(glm::mat3(view));
+	skyboxShader->setMat4("view", view);
+	skyboxShader->setMat4("projection", projection);
+}
+
 void processInput(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);

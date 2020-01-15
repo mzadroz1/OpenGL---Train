@@ -126,14 +126,11 @@ public:
 		glDeleteBuffers(1, &skyboxVAO);
 	}
 
-	void draw(glm::mat4 projection, glm::mat4 view)
+	void draw()
 	{
 		// draw skybox as last
 		glDepthFunc(GL_LEQUAL);
-		shader.Use();
-		view = glm::mat4(glm::mat3(view));
-		shader.setMat4("view", view);
-		shader.setMat4("projection", projection);
+		
 		// skybox cube
 		glBindVertexArray(skyboxVAO);
 		glActiveTexture(GL_TEXTURE0);
