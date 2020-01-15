@@ -5,8 +5,8 @@
 #include <SOIL.h>
 #include <iostream>
 #include "StreetLamp.h"
-#include "TrainChassis.h"
-#include "TrainBody.h"
+
+#include "Train.h"
 using namespace std;
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -105,9 +105,8 @@ int main() {
 		for (int i = 0; i < 10; i++) {
 			latarnie[i] = new StreetLamp(glm::vec3(2.0f, 0.0f, 5.0f * i), &ourShader, &lampShader);
 		}
-		TrainChassis pod({ 0.0f,0.0f,1.0f }, &ourShader);
-		TrainBody nad({ 0.0f,0.0f,1.0f }, & ourShader, &lampShader);
-		GLfloat rot_angle = 0.5f;
+		Train ciopong({ 0,0,1 }, &ourShader, &lampShader);
+		GLfloat rot_angle = 0.01f;
 
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		// main event loop
@@ -142,10 +141,9 @@ int main() {
 				latarnie[i]->draw();
 			}
 			//cosiek.draw();
-			pod.draw();
-			nad.draw();
-			pod.move(glm::vec3(0.0f, 0.0f, 0.03f));
-			nad.move(glm::vec3(0.0f, 0.0f, 0.03f));
+			ciopong.draw();
+			ciopong.move(glm::vec3(0.0f, 0.0f, rot_angle));
+			rot_angle += 0.0001f;
 			
 
 			//cubicLamp1.move(glm::vec3(0.0f, 0.0f, 0.002f));
