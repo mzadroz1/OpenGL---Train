@@ -144,8 +144,8 @@ int main() {
 			//cosiek.draw();
 			pod.draw();
 			nad.draw();
-			//pod.move(glm::vec3(0.0f, 0.0f, 0.01f));
-			//nad.move(glm::vec3(0.0f, 0.0f, 0.01f));
+			pod.move(glm::vec3(0.0f, 0.0f, 0.03f));
+			nad.move(glm::vec3(0.0f, 0.0f, 0.03f));
 			
 
 			//cubicLamp1.move(glm::vec3(0.0f, 0.0f, 0.002f));

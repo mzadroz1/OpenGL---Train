@@ -61,5 +61,15 @@ public:
 		Object* deck = new Cube(coordinates + glm::vec3(0.0f, 1.13f, 2.25f), { 1.45f,0.3f,6.5f }, "black-steel.png", shader);
 		items.push_back(deck);
 	}
+
+	void move(glm::vec3 vector) override
+	{
+		Composite::move(vector);
+		float angle = vector.z * 180 / M_PI * 0.65f;
+		for(int i = 0; i < 8; i++)
+		{
+			items[i]->rotate({ angle,0,0 });
+		}
+	}
 };
 
