@@ -36,36 +36,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Composite.cpp">
-      <Filter>base</Filter>
-    </ClCompile>
-    <ClCompile Include="Primitive.cpp">
-      <Filter>base</Filter>
-    </ClCompile>
-    <ClCompile Include="Cube.cpp">
-      <Filter>primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="Cylinder.cpp">
-      <Filter>primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="Tracks.cpp">
-      <Filter>composites</Filter>
-    </ClCompile>
-    <ClCompile Include="Train.cpp">
-      <Filter>composites</Filter>
-    </ClCompile>
-    <ClCompile Include="TrainBody.cpp">
-      <Filter>composites</Filter>
-    </ClCompile>
-    <ClCompile Include="TrainChassis.cpp">
-      <Filter>composites</Filter>
-    </ClCompile>
-    <ClCompile Include="StreetLamp.cpp">
-      <Filter>composites</Filter>
-    </ClCompile>
-    <ClCompile Include="Sphere.cpp">
-      <Filter>primitives</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="LampShader.vert">
@@ -78,6 +48,12 @@
       <Filter>shaders</Filter>
     </None>
     <None Include="LampShader.frag">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="SkyboxShader.frag">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="SkyboxShader.vert">
       <Filter>shaders</Filter>
     </None>
   </ItemGroup>
@@ -143,6 +119,9 @@
     </ClInclude>
     <ClInclude Include="BlockPointLight.h">
       <Filter>lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="Skybox.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

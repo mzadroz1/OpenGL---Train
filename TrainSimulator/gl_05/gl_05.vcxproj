@@ -86,24 +86,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Composite.cpp" />
-    <ClCompile Include="Cube.cpp" />
-    <ClCompile Include="Cylinder.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Primitive.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
-    <ClCompile Include="Sphere.cpp" />
-    <ClCompile Include="StreetLamp.cpp" />
-    <ClCompile Include="Tracks.cpp" />
-    <ClCompile Include="Train.cpp" />
-    <ClCompile Include="TrainBody.cpp" />
-    <ClCompile Include="TrainChassis.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="gl_05.frag" />
     <None Include="gl_05.vert" />
     <None Include="LampShader.frag" />
     <None Include="LampShader.vert" />
+    <None Include="SkyboxShader.frag" />
+    <None Include="SkyboxShader.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="iipw.png" />
@@ -121,6 +113,7 @@
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="BlockPointLight.h" />
+    <ClInclude Include="Skybox.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="SphericalPointLight.h" />
     <ClInclude Include="StreetLamp.h" />

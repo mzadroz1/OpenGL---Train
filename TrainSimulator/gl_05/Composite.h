@@ -11,12 +11,34 @@ public:
 	vector<Object*> items;
 	long itemsQuantity;
 
-	~Composite();
+	~Composite() {
+		for (Object* item : items) {
+			delete item;
+		}
+	}
 
-	void move(glm::vec3 vector) override;
-	void scale(glm::vec3 vector) override;
-	void rotate(glm::vec3 vector) override;
+	void move(glm::vec3 vector) override {
+		for (Object* item : items) {
+			item->move(vector);
+		}
+	}
 
-	void draw() override;
+	void scale(glm::vec3 vector) override {
+		for (Object* item : items) {
+			item->scale(vector);
+		}
+	}
+
+	void rotate(glm::vec3 vector) override {
+		for (Object* item : items) {
+			item->rotate(vector);
+		}
+	}
+
+	void draw() override {
+		for (Object* item : items) {
+			item->draw();
+		}
+	}
 };
 
