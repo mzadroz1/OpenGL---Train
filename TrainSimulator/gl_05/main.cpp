@@ -8,6 +8,8 @@
 #include "StreetLamp.h"
 
 #include "Train.h"
+#include "TrainChassis.h"
+#include "TrainBody.h"
 using namespace std;
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -104,7 +106,8 @@ int main() {
 		//Cylinder cosiek(glm::vec3(3.f, 3.f, 3.f), glm::vec3(1.f, 2.f, 1.f), "locoBody.png", &ourShader, glm::vec3(90.f, 0.f, 0.f));
 		//Sphere kulka(glm::vec3(-3.f, -3.f, -3.f), glm::vec3(1.f, 1.f, 1.f), "moon1024.bmp", &ourShader, glm::vec3(-90.f, 0.f, 0.f));
 		//Sphere kulka2(glm::vec3(-1.f, -1.f, -1.f), glm::vec3(1.f, 1.f, 1.f), "earth2048.bmp", &ourShader, glm::vec3(-90.f, 0.f, 0.f));
-		Tracks tory(glm::vec3(0.0f, 0.0f, -50.0f),100, &ourShader);
+		Tracks tory(glm::vec3(0.0f, 0.0f, -50.0f), 100, &ourShader);
+		Semaphore semafor(glm::vec3(-3.f, 0.f, -3.f), &ourShader, &lampShader);
 		//CubicPointLight cubicLamp1(&ourShader, glm::vec3(0.0f, 2.0f, 1.0f), &lampShader, glm::vec3(1.0f, 0.0f, 0.0f));
 		//CubicPointLight cubicLamp2(&ourShader, glm::vec3(1.0f, 2.0f, 1.0f), &lampShader, glm::vec3(0.0f, 0.0f, 1.0f));
 		//CubicPointLight cubicLamp3(&ourShader, glm::vec3(-1.0f, 2.0f, 1.0f), &lampShader, glm::vec3(0.0f, 1.0f, 0.0f));
