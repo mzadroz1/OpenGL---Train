@@ -27,6 +27,7 @@ using namespace std;
 #include "Floor.h"
 
 
+#include "Semaphore.h"
 const float MAX_FPS = 60.0f;
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);

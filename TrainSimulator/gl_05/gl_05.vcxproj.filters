@@ -126,5 +126,8 @@
     <ClInclude Include="Floor.h">
       <Filter>composites</Filter>
     </ClInclude>
+    <ClInclude Include="Semaphore.h">
+      <Filter>composites</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
