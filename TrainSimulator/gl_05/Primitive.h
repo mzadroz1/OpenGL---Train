@@ -126,8 +126,9 @@ public:
 		trans = glm::scale(trans, size);
 
 		theProgram->Use();
-		GLuint transformLoc = glGetUniformLocation(theProgram->get_programID(), "transform");
-		glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
+		theProgram->setMat4("transform", trans);
+		//GLuint transformLoc = glGetUniformLocation(theProgram->get_programID(), "transform");
+		//glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
 
 		// Bind Textures using texture units
 		glActiveTexture(GL_TEXTURE0);
