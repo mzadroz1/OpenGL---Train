@@ -1,26 +1,61 @@
 #pragma once
-#include "Composite.h"
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <SOIL.h>
+#include <iostream>
+
+#include "Primitive.h"
 #include "Cube.h"
 #include "ShaderProgram.h"
 
 class Floor :
-	public Composite
+	public Primitive
 {
 public: 
-	int const xQunatity = 4;
-	int const zQunatity = 10;
-	float const partSize = 50.0;
-	Floor(glm::vec3 coordinates, ShaderProgram* shader, const char* fileName) {
-		/*Cube *floor = new Cube(coordinates, glm::vec3(100, 0.05, 300), fileName, shader);
-		items.push_back(floor);*/
+	float const size = 500;
+	int const textureMultiplicity = 20;
+	Floor(glm::vec3 coordinates, ShaderProgram* shader) : Primitive(coordinates, glm::vec3(0.0, 0.0, 0.0), "textures/concrete.jpg", shader) {
+		init("textures/concrete.jpg");
+	}
 
-		for (int i = 0; i < xQunatity; ++i) {
-			for (int j = 0; j < zQunatity; ++j) {
-				glm::vec3 partCoordinations = glm::vec3(coordinates.x + i*partSize, coordinates.y, coordinates.z + j*partSize);
-				Cube* floorPart = new Cube(partCoordinations, glm::vec3(partSize, 0.05, partSize), fileName, shader);
-				items.push_back(floorPart);
-			}
+	void prepareVertices() override {
+		GLfloat vert[] = {
+			 -.5f*size,-.0f,-.5f * size,   .5f * size,-.0f,-.5f * size,   .5f * size,-.0f, .5f * size, -.5f * size,-.0f, .5f * size
+		};
+
+		// normal array
+		GLfloat normals[] = {
+			 0,1, 0,   0,1, 0,   0,1, 0,   0,1, 0,  // v7,v4,v3,v2 (bottom)
+		};
+
+		// texture coord array
+		GLfloat texCoords[] = {
+			0, textureMultiplicity,   textureMultiplicity, textureMultiplicity,   textureMultiplicity, 0,   0, 0
+		};
+
+		size_t elements = _countof(vert) + _countof(normals) + _countof(texCoords);
+
+		int texIndex = 0;
+		for (int i = 0; i < elements; i = i + 3) {
+			vertices.push_back(vert[i]);
+			vertices.push_back(vert[i + 1]);
+			vertices.push_back(vert[i + 2]);
+			vertices.push_back(normals[i]);
+			vertices.push_back(normals[i + 1]);
+			vertices.push_back(normals[i + 2]);
+			vertices.push_back(texCoords[texIndex]);
+			vertices.push_back(texCoords[texIndex + 1]);
+			texIndex += 2;
 		}
-		move(glm::vec3(-partSize * xQunatity / 2.0 + partSize*0.5, 0.0, 0.0));
+	}
+
+	void prepareIndices() override {
+		// index array for glDrawElements()
+		GLuint ind[] = {
+			 0, 1, 2,   2, 3, 0    // v0-v1-v2, v2-v3-v0 
+		};
+
+		for (int i = 0; i < 6; i++)
+			indices.push_back(ind[i]);
 	}
 };

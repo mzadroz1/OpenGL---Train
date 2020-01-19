@@ -12,7 +12,7 @@ class TrainBody :
 public:
 	TrainBody(glm::vec3 coordinates, ShaderProgram * shader, ShaderProgram* lampShader)
 	{
-		Object* body = new Cylinder(coordinates + glm::vec3(0.0f, 2.0f, 3.53f), { 0.7f,3.4f,0.7f }, "locoBody.png", shader, { 90,0,0 });
+		Object* body = new Cylinder(coordinates + glm::vec3(0.0f, 2.0f, 3.63f), { 0.7f,3.2f,0.7f }, "locoBody.png", shader, { 90,0,0 });
 		items.push_back(body);
 		Object* elka = new Cylinder(coordinates + glm::vec3(0.0f, 2.0f, 5.25f), { 0.5f,0.25f,0.5f }, "elka.png", shader, { 90,0,0 });
 		items.push_back(elka);
