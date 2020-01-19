@@ -15,12 +15,12 @@ private:
 
 	std::vector<std::string> faces
 	{
-		"skybox/posx.jpg",
-		"skybox/negx.jpg",
-		"skybox/posy.jpg",
-		"skybox/negy.jpg",
-		"skybox/posz.jpg",
-		"skybox/negz.jpg"
+		"skybox/posx.png",
+		"skybox/negx.png",
+		"skybox/posy.png",
+		"skybox/negy.png",
+		"skybox/posz.png",
+		"skybox/negz.png"
 	};
 
 	unsigned int loadCubemap(std::vector<std::string> faces)
