@@ -9,7 +9,6 @@ class Composite :
 {
 public:
 	vector<Object*> items;
-	long itemsQuantity;
 
 	~Composite() {
 		for (Object* item : items) {
@@ -40,5 +39,6 @@ public:
 			item->draw();
 		}
 	}
+
 };
 

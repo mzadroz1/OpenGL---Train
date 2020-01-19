@@ -23,12 +23,17 @@ using namespace std;
 #include "SphericalPointLight.h"
 #include "CylindricalPointLight.h"
 #include "Skybox.h"
+#include "Floor.h"
+
+
 const float MAX_FPS = 60.0f;
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow* window);
-int PointLight::pointLightsQuantity = 0;
+int PointLight::pointLightsQuantity = 0; //init static variable of PointLight
+
+
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode) {
 	cout << key << endl;
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
@@ -104,6 +109,7 @@ int main() {
 		//CylindricalPointLight cylindricalLamp(&ourShader, glm::vec3(-5.0f, 2.0f, 1.0f), &lampShader, glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.1f, 0.1f, 0.1f));
 		//cylindricalLamp.scale(glm::vec3(0.0f, 5.0f, 0.0f));
 		Skybox skybox = Skybox(skyboxShader);
+		Floor floor = Floor(glm::vec3(0, -0.1, 0), &ourShader, "textures/concrete.jpg");
 		StreetLamp* latarnie[10];
 		for (int i = 0; i < 10; i++) {
 			latarnie[i] = new StreetLamp(glm::vec3(5.0f, 0.0f, 10.0f * i), &ourShader, &lampShader);
@@ -132,6 +138,7 @@ int main() {
 			
 			//prostopdaloscian.rotate(glm::vec3(0.0f, rot_angle, 0.0f));
 			skybox.draw();
+			floor.draw();
 
 			//kulka.draw();
 			//kulka2.draw();

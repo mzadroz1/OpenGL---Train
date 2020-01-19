@@ -123,5 +123,8 @@
     <ClInclude Include="Skybox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Floor.h">
+      <Filter>composites</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
