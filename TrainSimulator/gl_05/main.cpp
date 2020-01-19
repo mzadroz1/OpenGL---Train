@@ -60,6 +60,9 @@ float deltaTime = 0.0f;	// time between current frame and last frame
 float lastFrame = 0.0f;
 GLuint WIDTH;
 GLuint HEIGHT;
+
+glm::vec3 train_speed = { 0.0f,0.0f,0.0f };
+
 int main() {
 	if (glfwInit() != GL_TRUE) {
 		cout << "GLFW initialization failed" << endl;
@@ -103,10 +106,9 @@ int main() {
 		Skybox skybox = Skybox(skyboxShader);
 		StreetLamp* latarnie[10];
 		for (int i = 0; i < 10; i++) {
-			latarnie[i] = new StreetLamp(glm::vec3(2.0f, 0.0f, 5.0f * i), &ourShader, &lampShader);
+			latarnie[i] = new StreetLamp(glm::vec3(5.0f, 0.0f, 10.0f * i), &ourShader, &lampShader);
 		}
 		Train ciopong({ 0,0,1 }, &ourShader, &lampShader);
-		GLfloat rot_angle = 0.01f;
 
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		// main event loop
@@ -142,8 +144,8 @@ int main() {
 			}
 			//cosiek.draw();
 			ciopong.draw();
-			ciopong.move(glm::vec3(0.0f, 0.0f, rot_angle));
-			rot_angle += 0.0001f;
+			ciopong.move(train_speed);
+
 			
 
 			//cubicLamp1.move(glm::vec3(0.0f, 0.0f, 0.002f));
@@ -203,6 +205,10 @@ void processInput(GLFWwindow* window) {
 		camera.ProcessKeyboard(LEFT, deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		camera.ProcessKeyboard(RIGHT, deltaTime);
+	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+		train_speed.z += 0.0001f;
+	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+		train_speed.z -= 0.0001f;
 }
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
 // ---------------------------------------------------------------------------------------------
