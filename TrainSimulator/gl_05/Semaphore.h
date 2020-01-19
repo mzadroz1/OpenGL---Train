@@ -9,16 +9,6 @@ class Semaphore :
 {
 private:
 
-	/*Object* lampRed;
-	Object* lampYellow;
-	Object* lampGreen;
-	Object* lampTurnedOffRed;
-	Object* lampTurnedOffYellow;
-	Object* lampTurnedOffGreen;
-	ShaderProgram* sh;
-	ShaderProgram* lSh;
-	glm::vec3 coor;
-	*/
 
 public:
 	Semaphore(glm::vec3 coordinates, ShaderProgram* shader, ShaderProgram* lampShader)
@@ -37,9 +27,7 @@ public:
 		SphericalPointLight* lampGreen = new SphericalPointLight(shader, coordinates + glm::vec3(0.f, 4.25f, 0.25f), lampShader, {0.3f, 0.3f, 0.3f}, glm::vec3(0.15f, 0.15f, 0.15f));
 		SphericalPointLight* lampYellow = new SphericalPointLight(shader, coordinates + glm::vec3(0.f, 4.75f, 0.25f), lampShader, { 0.3f, 0.3f, 0.3f }, glm::vec3(0.15f, 0.15f, 0.15f));
 		SphericalPointLight* lampRed = new SphericalPointLight(shader, coordinates + glm::vec3(0.f, 5.25f, 0.25f), lampShader, { 1.f, 0.f, 0.f }, glm::vec3(0.15f, 0.15f, 0.15f));
-		//Object* lampTurnedOffGreen = new Sphere(coordinates + glm::vec3(0.f, 4.25f, 0.25f), glm::vec3(0.15f, 0.15f, 0.15f), "steel.png", shader);
-		//Object* lampTurnedOffYellow = new Sphere(coordinates + glm::vec3(0.f, 4.75f, 0.25f), glm::vec3(0.15f, 0.15f, 0.15f), "steel.png", shader);
-		//lampTurnedOffRed = new Sphere(coordinates + glm::vec3(0.f, 5.25f, 0.25f), glm::vec3(0.15f, 0.15f, 0.15f), "steel.png", shader);
+
 		items.push_back(lampRed);
 		items.push_back(lampYellow);
 		items.push_back(lampGreen);
