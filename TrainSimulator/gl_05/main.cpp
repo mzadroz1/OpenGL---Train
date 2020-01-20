@@ -23,12 +23,17 @@ using namespace std;
 #include "SphericalPointLight.h"
 #include "CylindricalPointLight.h"
 #include "Skybox.h"
+#include "Floor.h"
+
+
 const float MAX_FPS = 60.0f;
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow* window);
-int PointLight::pointLightsQuantity = 0;
+int PointLight::pointLightsQuantity = 0; //init static variable of PointLight
+
+
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode) {
 	cout << key << endl;
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
@@ -96,7 +101,7 @@ int main() {
 		//Cylinder cosiek(glm::vec3(3.f, 3.f, 3.f), glm::vec3(1.f, 2.f, 1.f), "locoBody.png", &ourShader, glm::vec3(90.f, 0.f, 0.f));
 		//Sphere kulka(glm::vec3(-3.f, -3.f, -3.f), glm::vec3(1.f, 1.f, 1.f), "moon1024.bmp", &ourShader, glm::vec3(-90.f, 0.f, 0.f));
 		//Sphere kulka2(glm::vec3(-1.f, -1.f, -1.f), glm::vec3(1.f, 1.f, 1.f), "earth2048.bmp", &ourShader, glm::vec3(-90.f, 0.f, 0.f));
-		Tracks tory(glm::vec3(0.0f, 0.0f, 0.0f), 50, &ourShader);
+		Tracks tory(glm::vec3(0.0f, 0.0f, -50.0f),100, &ourShader);
 		//CubicPointLight cubicLamp1(&ourShader, glm::vec3(0.0f, 2.0f, 1.0f), &lampShader, glm::vec3(1.0f, 0.0f, 0.0f));
 		//CubicPointLight cubicLamp2(&ourShader, glm::vec3(1.0f, 2.0f, 1.0f), &lampShader, glm::vec3(0.0f, 0.0f, 1.0f));
 		//CubicPointLight cubicLamp3(&ourShader, glm::vec3(-1.0f, 2.0f, 1.0f), &lampShader, glm::vec3(0.0f, 1.0f, 0.0f));
@@ -104,6 +109,7 @@ int main() {
 		//CylindricalPointLight cylindricalLamp(&ourShader, glm::vec3(-5.0f, 2.0f, 1.0f), &lampShader, glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.1f, 0.1f, 0.1f));
 		//cylindricalLamp.scale(glm::vec3(0.0f, 5.0f, 0.0f));
 		Skybox skybox = Skybox(skyboxShader);
+		Floor floor = Floor(glm::vec3(0, -0.1, 0), &ourShader);
 		StreetLamp* latarnie[10];
 		for (int i = 0; i < 10; i++) {
 			latarnie[i] = new StreetLamp(glm::vec3(5.0f, 0.0f, 10.0f * i), &ourShader, &lampShader);
@@ -132,6 +138,7 @@ int main() {
 			
 			//prostopdaloscian.rotate(glm::vec3(0.0f, rot_angle, 0.0f));
 			skybox.draw();
+			floor.draw();
 
 			//kulka.draw();
 			//kulka2.draw();

@@ -12,7 +12,7 @@ class StreetLamp :
 public:
 	StreetLamp(glm::vec3 coordinates, ShaderProgram *shader, ShaderProgram *lampShader, glm::vec3 color = { 0.95f,0.95f,0.65f })
 	{
-		Object* post = new Cylinder(coordinates + glm::vec3(0.0f, 2.5f, 0.0f), glm::vec3(0.15f, 5.0f, 0.15f),"steel.png" , shader);
+		Object* post = new Cylinder(coordinates + glm::vec3(0.0f, 2.5f, 0.0f), glm::vec3(0.15f, 5.0f, 0.15f), "steel.png", shader);
 		items.push_back(post);
 		Object* hat = new Cylinder(coordinates + glm::vec3(-0.45f, 5.3f, 0.0f), { 0.65f,0.15f,0.25f }, "steel.png", shader, { 0,0,-30 });
 		items.push_back(hat);
