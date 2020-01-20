@@ -8,6 +8,8 @@
 #include "StreetLamp.h"
 
 #include "Train.h"
+#include "TrainChassis.h"
+#include "TrainBody.h"
 using namespace std;
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -27,6 +29,7 @@ using namespace std;
 #include "Floor.h"
 
 
+#include "Semaphore.h"
 const float MAX_FPS = 60.0f;
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -66,6 +69,7 @@ float deltaTime = 0.0f;	// time between current frame and last frame
 float lastFrame = 0.0f;
 GLuint WIDTH;
 GLuint HEIGHT;
+long frameCounter = 0;
 
 glm::vec3 train_speed = { 0.0f,0.0f,0.0f };
 float lightBrightness = 0.0;
@@ -100,15 +104,8 @@ int main() {
 		ShaderProgram lampShader("LampShader.vert", "LampShader.frag");
 		ShaderProgram skyboxShader("SkyboxShader.vert", "SkyboxShader.frag");
 
-		//Cylinder cosiek(glm::vec3(3.f, 3.f, 3.f), glm::vec3(1.f, 2.f, 1.f), "locoBody.png", &ourShader, glm::vec3(90.f, 0.f, 0.f));
-		//Sphere kulka(glm::vec3(-3.f, -3.f, -3.f), glm::vec3(1.f, 1.f, 1.f), "moon1024.bmp", &ourShader, glm::vec3(-90.f, 0.f, 0.f));
-		//Sphere kulka2(glm::vec3(-1.f, -1.f, -1.f), glm::vec3(1.f, 1.f, 1.f), "earth2048.bmp", &ourShader, glm::vec3(-90.f, 0.f, 0.f));
-		Tracks tory(glm::vec3(0.0f, 0.0f, -50.0f),100, &ourShader);
-		//CubicPointLight cubicLamp1(&ourShader, glm::vec3(0.0f, 2.0f, 1.0f), &lampShader, glm::vec3(1.0f, 0.0f, 0.0f));
-		//CubicPointLight cubicLamp2(&ourShader, glm::vec3(1.0f, 2.0f, 1.0f), &lampShader, glm::vec3(0.0f, 0.0f, 1.0f));
-		//CubicPointLight cubicLamp3(&ourShader, glm::vec3(-1.0f, 2.0f, 1.0f), &lampShader, glm::vec3(0.0f, 1.0f, 0.0f));
-		//SphericalPointLight sphericalLamp(&ourShader, glm::vec3(-4.0f, 2.0f, 1.0f), &lampShader, glm::vec3(1.0f, 0.0f, 1.0f));
-		//CylindricalPointLight cylindricalLamp(&ourShader, glm::vec3(-5.0f, 2.0f, 1.0f), &lampShader, glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.1f, 0.1f, 0.1f));
+		Tracks tory(glm::vec3(0.0f, 0.0f, -50.0f), 100, &ourShader);
+		Semaphore semafor(glm::vec3(-3.f, 0.f, -3.f), &ourShader, &lampShader);
 		//cylindricalLamp.scale(glm::vec3(0.0f, 5.0f, 0.0f));
 		Skybox skybox = Skybox(skyboxShader);
 		Floor floor = Floor(glm::vec3(0, -0.1, 0), &ourShader);
@@ -129,50 +126,32 @@ int main() {
 				continue;
 			lastFrame = currentFrame;
 			processInput(window);
+
+			if (frameCounter > MAX_FPS * 17) frameCounter = 0;
+			if (frameCounter == 0) semafor.changeToGreen();
+			else if (frameCounter == MAX_FPS * 5) semafor.changeToYellow();
+			else if (frameCounter == MAX_FPS * 7) semafor.changeToRed();
+			else if (frameCounter == MAX_FPS * 15) semafor.changeToYellowRed();
+			frameCounter++;
 			
 			// Clear the colorbuffer
 			glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			//rot_angle += 0.01f;
-			//if (rot_angle >= 360.0f) rot_angle -= 360.0f;
-
 			setUpShaders(&ourShader, &lampShader, &skyboxShader);
 			
-			//prostopdaloscian.rotate(glm::vec3(0.0f, rot_angle, 0.0f));
 			skybox.draw();
 			floor.draw();
-
-			//kulka.draw();
-			//kulka2.draw();
-			
 			tory.draw();
+			semafor.draw();
 			
-
 			for (int i = 0; i < 10; i++) {
 				latarnie[i]->draw();
 			}
-			//cosiek.draw();
+
 			ciopong.draw();
 			ciopong.move(train_speed);
 			ciopong.setLightsBrightness(lightBrightness);
 
-			
-
-			//cubicLamp1.move(glm::vec3(0.0f, 0.0f, 0.002f));
-			//cubicLamp2.move(glm::vec3(0.0f, 0.0f, 0.004f));
-			//cubicLamp3.move(glm::vec3(0.0f, 0.0f, 0.006f));
-			//cubicLamp1.draw();
-			//cubicLamp2.draw();
-			//cubicLamp3.draw();
-			//sphericalLamp.draw();
-			//cylindricalLamp.draw();
-
-			/*kostka1.move(glm::vec3(0.0f, 0.0f, 0.01f));
-			kostka2.move(glm::vec3(0.0f, 0.0f, 0.01f));
-			kostka3.move(glm::vec3(0.0f, 0.0f, 0.01f));
-			kostka4.move(glm::vec3(0.0f, 0.0f, 0.01f));
-			prostopadloscian.move(glm::vec3(0.0f, 0.0f, 0.01f));*/
-			
 			// Swap the screen buffers
 			glfwSwapBuffers(window);
 		}
