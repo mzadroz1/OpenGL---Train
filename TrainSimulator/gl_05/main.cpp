@@ -4,6 +4,7 @@
 #include <GLFW/glfw3.h>
 #include <SOIL.h>
 #include <iostream>
+#include <math.h>
 #include "StreetLamp.h"
 
 #include "Train.h"
@@ -67,6 +68,7 @@ GLuint WIDTH;
 GLuint HEIGHT;
 
 glm::vec3 train_speed = { 0.0f,0.0f,0.0f };
+float lightBrightness = 0.0;
 
 int main() {
 	if (glfwInit() != GL_TRUE) {
@@ -152,6 +154,7 @@ int main() {
 			//cosiek.draw();
 			ciopong.draw();
 			ciopong.move(train_speed);
+			ciopong.setLightsBrightness(lightBrightness);
 
 			
 
@@ -216,6 +219,14 @@ void processInput(GLFWwindow* window) {
 		train_speed.z += 0.0001f;
 	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
 		train_speed.z -= 0.0001f;
+
+
+	if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) //increase brightness 
+		lightBrightness = 0.01;
+	else if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS) //decrease brightness
+		lightBrightness = -0.01;
+	else
+		lightBrightness = 0.0;
 }
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
 // ---------------------------------------------------------------------------------------------
