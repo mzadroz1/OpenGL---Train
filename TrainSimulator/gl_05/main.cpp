@@ -31,7 +31,7 @@ using namespace std;
 #include "Road.h"
 #include "Barrier.h"
 #include "Semaphore.h"
-
+#include "Cargo.h"
 
 const float MAX_FPS = 60.0f;
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -242,6 +242,7 @@ int main() {
 		for (int i = 0; i < 10; i++) {
 			latarnie[i] = new StreetLamp(glm::vec3(5.0f, 0.0f, 10.0f * i), &ourShader, &lampShader);
 		}
+		Cargo cargo(glm::vec3(0.f, 0.f, -8.f), 2, &ourShader);
 		Train ciopong({ 0,0,1 }, &ourShader, &lampShader);
 		Car* cars[4];
 		const char*  bodyTextures[] = { "textures/red_metal.png", "textures/yellow_metal.png", "textures/blue_metal.png", "textures/green_metal.png" };
@@ -290,7 +291,9 @@ int main() {
 			barrier.draw();
 			road.draw();
 			rainbow.draw();
+			cargo.draw();
 			ciopong.draw();
+			cargo.move(train_speed);
 			ciopong.move(train_speed);
 			rainbow.move(train_speed);
 
