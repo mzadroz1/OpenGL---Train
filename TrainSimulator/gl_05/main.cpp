@@ -31,7 +31,7 @@ using namespace std;
 #include "Road.h"
 #include "Barrier.h"
 #include "Semaphore.h"
-
+#include "Cargo.h"
 
 const float MAX_FPS = 60.0f;
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -39,6 +39,125 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow* window);
 int PointLight::pointLightsQuantity = 0; //init static variable of PointLight
+
+typedef struct {
+	double r;       // a fraction between 0 and 1
+	double g;       // a fraction between 0 and 1
+	double b;       // a fraction between 0 and 1
+} rgb;
+
+typedef struct {
+	double h;       // angle in degrees
+	double s;       // a fraction between 0 and 1
+	double v;       // a fraction between 0 and 1
+} hsv;
+
+static hsv   rgb2hsv(rgb in);
+static rgb   hsv2rgb(hsv in);
+
+hsv rgb2hsv(rgb in)
+{
+	hsv         out;
+	double      min, max, delta;
+
+	min = in.r < in.g ? in.r : in.g;
+	min = min < in.b ? min : in.b;
+
+	max = in.r > in.g ? in.r : in.g;
+	max = max > in.b ? max : in.b;
+
+	out.v = max;                                // v
+	delta = max - min;
+	if (delta < 0.00001)
+	{
+		out.s = 0;
+		out.h = 0; // undefined, maybe nan?
+		return out;
+	}
+	if (max > 0.0) { // NOTE: if Max is == 0, this divide would cause a crash
+		out.s = (delta / max);                  // s
+	}
+	else {
+		// if max is 0, then r = g = b = 0              
+		// s = 0, h is undefined
+		out.s = 0.0;
+		out.h = NAN;                            // its now undefined
+		return out;
+	}
+	if (in.r >= max)                           // > is bogus, just keeps compilor happy
+		out.h = (in.g - in.b) / delta;        // between yellow & magenta
+	else
+		if (in.g >= max)
+			out.h = 2.0 + (in.b - in.r) / delta;  // between cyan & yellow
+		else
+			out.h = 4.0 + (in.r - in.g) / delta;  // between magenta & cyan
+
+	out.h *= 60.0;                              // degrees
+
+	if (out.h < 0.0)
+		out.h += 360.0;
+
+	return out;
+}
+
+
+rgb hsv2rgb(hsv in)
+{
+	double      hh, p, q, t, ff;
+	long        i;
+	rgb         out;
+
+	if (in.s <= 0.0) {       // < is bogus, just shuts up warnings
+		out.r = in.v;
+		out.g = in.v;
+		out.b = in.v;
+		return out;
+	}
+	hh = in.h;
+	if (hh >= 360.0) hh = 0.0;
+	hh /= 60.0;
+	i = (long)hh;
+	ff = hh - i;
+	p = in.v * (1.0 - in.s);
+	q = in.v * (1.0 - (in.s * ff));
+	t = in.v * (1.0 - (in.s * (1.0 - ff)));
+
+	switch (i) {
+	case 0:
+		out.r = in.v;
+		out.g = t;
+		out.b = p;
+		break;
+	case 1:
+		out.r = q;
+		out.g = in.v;
+		out.b = p;
+		break;
+	case 2:
+		out.r = p;
+		out.g = in.v;
+		out.b = t;
+		break;
+
+	case 3:
+		out.r = p;
+		out.g = q;
+		out.b = in.v;
+		break;
+	case 4:
+		out.r = t;
+		out.g = p;
+		out.b = in.v;
+		break;
+	case 5:
+	default:
+		out.r = in.v;
+		out.g = p;
+		out.b = q;
+		break;
+	}
+	return out;
+}
 
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode) {
@@ -108,24 +227,30 @@ int main() {
 		ShaderProgram skyboxShader("SkyboxShader.vert", "SkyboxShader.frag");
 
 		Tracks tory(glm::vec3(0.0f, 0.0f, -50.0f), 100, &ourShader);
-		Semaphore semafor(glm::vec3(-3.f, 0.f, 10.f), &ourShader, &lampShader);
+		Semaphore semafor(glm::vec3(-3.f, 0.f, 18.f), &ourShader, &lampShader);
+		
 		//cylindricalLamp.scale(glm::vec3(0.0f, 5.0f, 0.0f));
 		Skybox skybox = Skybox(skyboxShader);
 		Floor floor = Floor(glm::vec3(0, -0.1, 0), &ourShader);
 		Road road = Road(glm::vec3(-200.0, -0.05, 15.0), 20, &ourShader);
 		Barrier barrier = Barrier({-2, 0.3, 18}, &ourShader);
 
+		SphericalPointLight rainbow = SphericalPointLight(&ourShader, glm::vec3(0.0f, 4.0f, 5.0f), &lampShader, { 0.5,0.5,0.5 }, { 0.25,0.25,0.25 });
+	
+
 		StreetLamp* latarnie[10];
 		for (int i = 0; i < 10; i++) {
 			latarnie[i] = new StreetLamp(glm::vec3(5.0f, 0.0f, 10.0f * i), &ourShader, &lampShader);
 		}
+		Cargo cargo(glm::vec3(0.f, 0.f, -8.f), 2, &ourShader);
 		Train ciopong({ 0,0,1 }, &ourShader, &lampShader);
 		Car* cars[4];
 		const char*  bodyTextures[] = { "textures/red_metal.png", "textures/yellow_metal.png", "textures/blue_metal.png", "textures/green_metal.png" };
 		for (int i = 0; i < 4; i++) {
 			cars[i] = new Car({ -6 - 6*i, 0.6, 16.25 }, &ourShader, &lampShader, bodyTextures[i]);
 		}
-
+		hsv color;
+		color.h = 0.0f; color.v = 1.0; color.s = 0.9;
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		// main event loop
 		while (!glfwWindowShouldClose(window)) {
@@ -165,8 +290,18 @@ int main() {
 			}
 			barrier.draw();
 			road.draw();
+			rainbow.draw();
+			cargo.draw();
 			ciopong.draw();
+			cargo.move(train_speed);
 			ciopong.move(train_speed);
+			rainbow.move(train_speed);
+
+			if (color.h == 360.0f)
+				color.h = 0.0f;
+			color.h +=1.0f;
+			rgb c = hsv2rgb(color);
+			rainbow.changeColour({ c.r,c.g,c.b });
 			ciopong.setLightsBrightness(lightBrightness);
 
 			// Swap the screen buffers
@@ -212,9 +347,9 @@ void processInput(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		camera.ProcessKeyboard(RIGHT, deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
-		train_speed.z += 0.0001f;
+		train_speed.z += 0.0005f;
 	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
-		train_speed.z -= 0.0001f;
+		train_speed.z -= 0.0005f;
 
 
 	if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) //increase brightness 
