@@ -108,7 +108,8 @@ int main() {
 		ShaderProgram skyboxShader("SkyboxShader.vert", "SkyboxShader.frag");
 
 		Tracks tory(glm::vec3(0.0f, 0.0f, -50.0f), 100, &ourShader);
-		Semaphore semafor(glm::vec3(-3.f, 0.f, 10.f), &ourShader, &lampShader);
+		Semaphore semafor(glm::vec3(-3.f, 0.f, 18.f), &ourShader, &lampShader);
+		
 		//cylindricalLamp.scale(glm::vec3(0.0f, 5.0f, 0.0f));
 		Skybox skybox = Skybox(skyboxShader);
 		Floor floor = Floor(glm::vec3(0, -0.1, 0), &ourShader);
