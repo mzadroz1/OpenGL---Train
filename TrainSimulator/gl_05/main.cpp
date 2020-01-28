@@ -212,9 +212,9 @@ void processInput(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		camera.ProcessKeyboard(RIGHT, deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
-		train_speed.z += 0.0001f;
+		train_speed.z += 0.0005f;
 	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
-		train_speed.z -= 0.0001f;
+		train_speed.z -= 0.0005f;
 
 
 	if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) //increase brightness 

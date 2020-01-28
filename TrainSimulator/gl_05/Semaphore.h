@@ -21,9 +21,9 @@ public:
 		items.push_back(hat2);
 		Object* hat3 = new Sphere(coordinates + glm::vec3(0.f, 5.5f, -0.25f), glm::vec3(0.25f, 0.05f, 0.4f), "moon1024.bmp", shader);
 		items.push_back(hat3);
-		SphericalPointLight* lampGreen = new SphericalPointLight(shader, coordinates + glm::vec3(0.f, 4.25f, -0.25f), lampShader, { 0.3f, 0.3f, 0.3f }, glm::vec3(0.15f, 0.15f, 0.15f));
-		SphericalPointLight* lampYellow = new SphericalPointLight(shader, coordinates + glm::vec3(0.f, 4.75f, -0.25f), lampShader, { 0.3f, 0.3f, 0.3f }, glm::vec3(0.15f, 0.15f, 0.15f));
-		SphericalPointLight* lampRed = new SphericalPointLight(shader, coordinates + glm::vec3(0.f, 5.25f, -0.25f), lampShader, { 1.f, 0.f, 0.f }, glm::vec3(0.15f, 0.15f, 0.15f));
+		SphericalPointLight* lampGreen = new SphericalPointLight(shader, coordinates + glm::vec3(0.f, 4.25f, -0.25f), lampShader, { 0.3f, 0.3f, 0.3f }, glm::vec3(0.15f, 0.15f, 0.15f),{0.1,0.1,0.1},{0.1,0.1,0.1},1,0.35f,0.44f);
+		SphericalPointLight* lampYellow = new SphericalPointLight(shader, coordinates + glm::vec3(0.f, 4.75f, -0.25f), lampShader, { 0.3f, 0.3f, 0.3f }, glm::vec3(0.15f, 0.15f, 0.15f), { 0.1,0.1,0.1 }, { 0.1,0.1,0.1 }, 1, 0.35f, 0.44f);
+		SphericalPointLight* lampRed = new SphericalPointLight(shader, coordinates + glm::vec3(0.f, 5.25f, -0.25f), lampShader, { 1.f, 0.f, 0.f }, glm::vec3(0.15f, 0.15f, 0.15f), { 0.1,0.1,0.1 }, { 0.1,0.1,0.1 }, 1, 0.35f, 0.44f);
 		items.push_back(lampRed);
 		items.push_back(lampYellow);
 		items.push_back(lampGreen);
