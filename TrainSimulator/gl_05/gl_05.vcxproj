@@ -104,6 +104,7 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Cargo.h" />
+    <ClInclude Include="CargoBody.h" />
     <ClInclude Include="CargoChassis.h" />
     <ClInclude Include="Composite.h" />
     <ClInclude Include="Cube.h" />

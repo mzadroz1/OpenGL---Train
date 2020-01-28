@@ -242,7 +242,7 @@ int main() {
 		for (int i = 0; i < 10; i++) {
 			latarnie[i] = new StreetLamp(glm::vec3(5.0f, 0.0f, 10.0f * i), &ourShader, &lampShader);
 		}
-		Cargo cargo(glm::vec3(-3.f, 3.f, -3.f), &ourShader);
+		Cargo cargo(glm::vec3(0.f, 0.f, -8.f), 2, &ourShader);
 		Train ciopong({ 0,0,1 }, &ourShader, &lampShader);
 		Car* cars[4];
 		const char*  bodyTextures[] = { "textures/red_metal.png", "textures/yellow_metal.png", "textures/blue_metal.png", "textures/green_metal.png" };
@@ -293,6 +293,7 @@ int main() {
 			rainbow.draw();
 			cargo.draw();
 			ciopong.draw();
+			cargo.move(train_speed);
 			ciopong.move(train_speed);
 			rainbow.move(train_speed);
 

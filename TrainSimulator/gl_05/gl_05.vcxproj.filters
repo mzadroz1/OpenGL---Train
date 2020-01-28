@@ -135,5 +135,8 @@
     <ClInclude Include="CargoChassis.h">
       <Filter>composites</Filter>
     </ClInclude>
+    <ClInclude Include="CargoBody.h">
+      <Filter>composites</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
