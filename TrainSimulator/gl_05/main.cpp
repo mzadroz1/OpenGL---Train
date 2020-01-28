@@ -27,9 +27,12 @@ using namespace std;
 #include "CylindricalPointLight.h"
 #include "Skybox.h"
 #include "Floor.h"
-
-
+#include "Car.h"
+#include "Road.h"
+#include "Barrier.h"
 #include "Semaphore.h"
+
+
 const float MAX_FPS = 60.0f;
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -105,15 +108,23 @@ int main() {
 		ShaderProgram skyboxShader("SkyboxShader.vert", "SkyboxShader.frag");
 
 		Tracks tory(glm::vec3(0.0f, 0.0f, -50.0f), 100, &ourShader);
-		Semaphore semafor(glm::vec3(-3.f, 0.f, -3.f), &ourShader, &lampShader);
+		Semaphore semafor(glm::vec3(-3.f, 0.f, 10.f), &ourShader, &lampShader);
 		//cylindricalLamp.scale(glm::vec3(0.0f, 5.0f, 0.0f));
 		Skybox skybox = Skybox(skyboxShader);
 		Floor floor = Floor(glm::vec3(0, -0.1, 0), &ourShader);
+		Road road = Road(glm::vec3(-200.0, -0.05, 15.0), 20, &ourShader);
+		Barrier barrier = Barrier({-2, 0.3, 18}, &ourShader);
+
 		StreetLamp* latarnie[10];
 		for (int i = 0; i < 10; i++) {
 			latarnie[i] = new StreetLamp(glm::vec3(5.0f, 0.0f, 10.0f * i), &ourShader, &lampShader);
 		}
 		Train ciopong({ 0,0,1 }, &ourShader, &lampShader);
+		Car* cars[4];
+		const char*  bodyTextures[] = { "textures/red_metal.png", "textures/yellow_metal.png", "textures/blue_metal.png", "textures/green_metal.png" };
+		for (int i = 0; i < 4; i++) {
+			cars[i] = new Car({ -6 - 6*i, 0.6, 16.25 }, &ourShader, &lampShader, bodyTextures[i]);
+		}
 
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		// main event loop
@@ -148,6 +159,12 @@ int main() {
 				latarnie[i]->draw();
 			}
 
+			
+			for (int i = 0; i < 4; i++) {
+				cars[i]->draw();
+			}
+			barrier.draw();
+			road.draw();
 			ciopong.draw();
 			ciopong.move(train_speed);
 			ciopong.setLightsBrightness(lightBrightness);
