@@ -129,5 +129,11 @@
     <ClInclude Include="Semaphore.h">
       <Filter>composites</Filter>
     </ClInclude>
+    <ClInclude Include="Cargo.h">
+      <Filter>composites</Filter>
+    </ClInclude>
+    <ClInclude Include="CargoChassis.h">
+      <Filter>composites</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
