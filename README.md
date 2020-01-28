@@ -23,5 +23,20 @@
 12. Prezentacja gotowego projektu na spotkaniu nr 7
 
 **Przykład projektu**
-
- <img src="/przyklad/train.jpg" alt="drawing" width="300"/>
+ <img src="/docs/trainConcept.png" alt="drawing" width="300"/>
+ 
+ **Efekt końcowy**
+  <img src="/docs/trainFinal.png" alt="drawing" width="300"/>
+  
+ Głównym elementem stworzonej strony jest tytułowy Pociąg poruszający się po torach wzdłuż których widoczny jest rząd lamp.
+ Dodatko w scenie znajdują sie samochody na drodze asfaltowej, stojące przed zamkniętym szlabanem.
+ 
+ Sterowanie:
+  - ruch pociągu: strzłka w górę / strzałka w dół
+  - ruch kamerą: W/A/S/D + MYSZ
+  - zmiana intensywności oświetlenia pociągu: O / P
+  
+  
+ Źródła z jakich korzystaliśmy: 
+	- https://learnopengl.com/
+	- http://www.songho.ca/opengl/gl_sphere.html
